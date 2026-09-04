@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Tech for Realtors</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#ECEAE2;
+    --bg-alt:#E1DED2;
+    --card:#F5F3EC;
+    --ink:#211D19;
+    --ink-soft:#5B5449;
+    --line:#D3CDBD;
+    --accent:#0E6B64;
+    --accent-ink:#FBFAF6;
+    --brass:#8C6A26;
+    --shadow: 0 1px 0 rgba(33,29,25,0.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1712;
+      --bg-alt:#242019;
+      --card:#221D17;
+      --ink:#EEE9DD;
+      --ink-soft:#B7AC98;
+      --line:#3B3427;
+      --accent:#2FB4A9;
+      --accent-ink:#0B1917;
+      --brass:#D2A855;
+      --shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1712;
+    --bg-alt:#242019;
+    --card:#221D17;
+    --ink:#EEE9DD;
+    --ink-soft:#B7AC98;
+    --line:#3B3427;
+    --accent:#2FB4A9;
+    --accent-ink:#0B1917;
+    --brass:#D2A855;
+    --shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Zilla Slab', Georgia, 'Times New Roman', serif;
+    font-weight:700;
+    line-height:1.08;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    font-variant-numeric:tabular-nums;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 clamp(20px,4vw,48px);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:16px clamp(20px,4vw,48px);
+  }
+  .brand{
+    font-family:'Zilla Slab', serif; font-weight:700; font-size:1.05rem;
+    letter-spacing:-0.01em;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .brand .mark{
+    display:inline-block; width:9px; height:9px; border-radius:2px;
+    background:var(--accent); transform:rotate(45deg);
+  }
+  nav.links{display:flex; align-items:center; gap:22px;}
+  nav.links a.section-link{
+    font-size:0.88rem; font-weight:500; color:var(--ink-soft);
+    text-decoration:none;
+  }
+  nav.links a.section-link:hover{color:var(--ink);}
+  .lang-switch{
+    display:flex; gap:2px; border:1px solid var(--line); border-radius:6px; padding:2px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; font-weight:600;
+  }
+  .lang-switch button{
+    border:none; background:transparent; color:var(--ink-soft);
+    padding:5px 9px; border-radius:4px; cursor:pointer; letter-spacing:0.03em;
+  }
+  .lang-switch button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Public Sans', sans-serif; font-weight:600; font-size:0.88rem;
+    padding:10px 18px; border-radius:7px; text-decoration:none;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .12s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-ghost{border-color:var(--line); color:var(--ink);}
+  .nav-cta{display:flex; align-items:center; gap:12px;}
+
+  @media (max-width:760px){
+    nav.links{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:clamp(56px,9vw,96px) 0 clamp(40px,6vw,64px);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.6rem);
+    margin-top:14px;
+  }
+  .hero p.lede{
+    font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin-top:18px;
+  }
+  .hero-actions{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;}
+  .hero-stats{
+    display:flex; flex-direction:column; gap:14px;
+    border-left:1px solid var(--line); padding-left:24px;
+  }
+  .hero-stats .stat{display:flex; flex-direction:column; gap:2px;}
+  .hero-stats .stat .v{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:1rem; color:var(--ink);}
+  .hero-stats .stat .k{font-size:0.78rem; color:var(--ink-soft);}
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-stats{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:18px; flex-direction:row; flex-wrap:wrap; gap:24px;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:clamp(48px,7vw,80px) 0; border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:34px; max-width:60ch;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem); margin-top:8px;}
+  .section-head p{color:var(--ink-soft); margin-top:10px; font-size:0.98rem;}
+
+  /* ---------- specs (ficha tecnica) ---------- */
+  .spec-list{border-top:1px solid var(--line);}
+  .spec-row{
+    display:grid; grid-template-columns: 220px 1fr; gap:24px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .spec-row .k{
+    font-family:'IBM Plex Mono',monospace; font-size:0.82rem; font-weight:600;
+    color:var(--brass); letter-spacing:0.02em; padding-top:2px;
+  }
+  .spec-row .v{font-size:0.98rem;}
+  @media (max-width:640px){
+    .spec-row{grid-template-columns:1fr; gap:4px;}
+  }
+
+  /* ---------- comps ---------- */
+  .comp-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .comp-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .comp-grid{grid-template-columns:1fr;} }
+  .comp-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:26px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:16px;
+  }
+  .comp-card .url{
+    font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--accent); font-weight:600;
+  }
+  .comp-card h3{font-size:1.28rem; margin-top:4px;}
+  .comp-card p.desc{color:var(--ink-soft); font-size:0.94rem; margin:0;}
+  .comp-stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:14px; border-top:1px solid var(--line);}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600;
+    background:var(--bg-alt); border:1px solid var(--line); color:var(--ink-soft);
+    padding:5px 9px; border-radius:5px;
+  }
+
+  /* ---------- rates ---------- */
+  .rate-group{margin-bottom:38px;}
+  .rate-group > .label{
+    font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px; display:block;
+  }
+  .rate-cards{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){ .rate-cards{grid-template-columns:1fr;} }
+  .rate-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:24px; box-shadow:var(--shadow);
+  }
+  .rate-card.featured{border-color:var(--accent); position:relative;}
+  .rate-card .tier{font-size:0.92rem; font-weight:600; color:var(--ink-soft);}
+  .rate-card .price{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:2rem;
+    color:var(--ink); margin-top:6px; display:block;
+  }
+  .rate-card .price .unit{font-size:0.9rem; color:var(--ink-soft); font-weight:500;}
+  .rate-card ul{margin:16px 0 0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .rate-card li{font-size:0.9rem; color:var(--ink-soft); padding-left:16px; position:relative;}
+  .rate-card li::before{content:"—"; position:absolute; left:0; color:var(--brass);}
+  .rate-note{font-size:0.85rem; color:var(--ink-soft); margin-top:14px;}
+
+  /* ---------- about ---------- */
+  .about-body h3{font-size:1.3rem;}
+  .about-body p{color:var(--ink-soft); margin-top:10px; max-width:64ch;}
+  .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+
+  /* ---------- footer / cta ---------- */
+  footer{padding:clamp(48px,7vw,80px) 0 40px;}
+  .cta-block{
+    background:var(--ink); color:var(--bg);
+    border-radius:14px; padding:clamp(32px,5vw,56px);
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px; align-items:center;
+  }
+  .cta-block h2{color:var(--bg); font-size:clamp(1.7rem,3.4vw,2.3rem);}
+  .cta-block .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .cta-block .btn-ghost{border-color:color-mix(in srgb, var(--bg) 30%, transparent); color:var(--bg);}
+  .cta-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .contact-line{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:color-mix(in srgb, var(--bg) 65%, transparent); margin-top:6px;}
+  .fine-print{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    margin-top:28px; font-size:0.78rem; color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+
+<header class="nav">
+  <div class="nav-row">
+    <div class="brand"><span class="mark"></span> Real Tech for Realtors</div>
+    <nav class="links">
+      <a class="section-link" href="#specs" data-i18n="nav.specs">Ficha técnica</a>
+      <a class="section-link" href="#comps" data-i18n="nav.comps">Portafolio</a>
+      <a class="section-link" href="#rates" data-i18n="nav.rates">Tarifas</a>
+      <a class="section-link" href="#about" data-i18n="nav.about">Sobre mí</a>
+    </nav>
+    <div class="nav-cta">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="fr">FR</button>
+      </div>
+      <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="nav.cta">Agendar llamada</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" data-i18n="hero.eyebrow">Diseño web para agentes y negocios de la Riviera Maya</span>
+        <h1 data-i18n="hero.title">Tu negocio, con ficha técnica propia.</h1>
+        <p class="lede" data-i18n="hero.lede">Construido por un agente inmobiliario que ha operado este mismo sistema en su propio sitio durante años — bilingüe desde el inicio y en línea en menos de un mes.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="hero.cta1">Agendar llamada</a>
+          <a class="btn btn-ghost" href="https://wa.me/529842136512" target="_blank" rel="noopener" data-i18n="hero.cta2">WhatsApp con Craig</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="v">11+ <span data-i18n="hero.stat1k">años</span></span><span class="k" data-i18n="hero.stat1v">Operando en la Riviera Maya</span></div>
+        <div class="stat"><span class="v">AMPI PDC</span><span class="k" data-i18n="hero.stat2v">Vicepresidente de Patrocinios</span></div>
+        <div class="stat"><span class="v mono">EN · ES · FR</span><span class="k" data-i18n="hero.stat3v">Sitios multilingües</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="specs.eyebrow">Ficha técnica</span>
+        <h2 data-i18n="specs.title">La ficha técnica</h2>
+        <p data-i18n="specs.sub">Cada sitio incluye lo mismo que corre mi propio negocio — nada de plantillas genéricas.</p>
+      </div>
+      <div class="spec-list">
+        <div class="spec-row"><div class="k" data-i18n="specs.r1k">IDIOMAS</div><div class="v" data-i18n="specs.r1v">Bilingüe EN/ES por defecto, FR bajo pedido, con selector en cada página</div></div>
+        <div class="spec-row"><div class="k" data-i18n="specs.r2k">PÁGINAS DE PROPIEDADES</div><div class="v" data-i18n="specs.r2v">Dinámicas e integradas directamente en el sitio — actualiza tus propiedades tú mismo, sin depender de un feed de MLS</div></div>
+        <div class="spec-row"><div class="k" data-i18n="specs.r3k">PANEL DE ADMINISTRACIÓN</div><div class="v" data-i18n="specs.r3v">Protegido con contraseña — actualiza propiedades sin depender de un programador</div></div>
+        <div class="spec-row"><div class="k" data-i18n="specs.r4k">CAPTACIÓN DE LEADS</div><div class="v" data-i18n="specs.r4v">Botón flotante de WhatsApp más formularios de contacto</div></div>
+        <div class="spec-row"><div class="k" data-i18n="specs.r5k">HOSTING</div><div class="v" data-i18n="specs.r5v">Cloudflare Pages con CDN global y despliegue continuo desde GitHub</div></div>
+        <div class="spec-row"><div class="k" data-i18n="specs.r6k">ANALÍTICA</div><div class="v" data-i18n="specs.r6v">Google Analytics integrado desde el primer día</div></div>
+        <div class="spec-row"><div class="k" data-i18n="specs.r7k">IMÁGENES</div><div class="v" data-i18n="specs.r7v">Alojadas en Cloudinary y optimizadas automáticamente</div></div>
+        <div class="spec-row"><div class="k" data-i18n="specs.r8k">CHAT CON IA (OPCIONAL)</div><div class="v" data-i18n="specs.r8v">Widget de chat bilingüe 24/7, con límite de uso para que el costo sea predecible</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comps">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="comps.eyebrow">Portafolio</span>
+        <h2 data-i18n="comps.title">Portafolio</h2>
+        <p data-i18n="comps.sub">Tres sitios ya en operación con este mismo sistema.</p>
+      </div>
+      <div class="comp-grid">
+        <div class="comp-card">
+          <div>
+            <span class="url">exprealtymx.com</span>
+            <h3 data-i18n="comps.c1title">Mi propio sitio de corretaje</h3>
+            <p class="desc" data-i18n="comps.c1desc">Páginas dinámicas de propiedades, selector EN/ES en todo el sitio y panel de administración protegido con contraseña.</p>
+          </div>
+          <div class="comp-stats">
+            <span class="chip" data-i18n="comps.c1s1">EN / ES</span>
+            <span class="chip" data-i18n="comps.c1s2">Inicio · Propiedades · Contacto</span>
+            <span class="chip">Cloudflare Pages</span>
+          </div>
+        </div>
+        <div class="comp-card">
+          <div>
+            <span class="url">copalrealty.netlify.app</span>
+            <h3 data-i18n="comps.c2title">Copal Real Estate</h3>
+            <p class="desc" data-i18n="comps.c2desc">Agencia de Jérémie Séverin en Playa del Carmen. Estructura de cinco páginas, ilustraciones personalizadas en las secciones de servicio.</p>
+          </div>
+          <div class="comp-stats">
+            <span class="chip">EN / ES / FR</span>
+            <span class="chip" data-i18n="comps.c2s2">Inicio · Servicios · Destinos · Contacto</span>
+          </div>
+        </div>
+        <div class="comp-card">
+          <div>
+            <span class="url">athomerivieramaya.com</span>
+            <h3 data-i18n="comps.c3title">At Home Riviera Maya</h3>
+            <p class="desc" data-i18n="comps.c3desc">Gestión de propiedades vacacionales en Playa del Carmen, Akumal y Puerto Aventuras — con una guía digital para huéspedes en cada unidad, accesible por código QR.</p>
+          </div>
+          <div class="comp-stats">
+            <span class="chip">EN / ES</span>
+            <span class="chip" data-i18n="comps.c3s2">Guías de huéspedes</span>
+            <span class="chip">Netlify</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rates">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="rates.eyebrow">Tarifas</span>
+        <h2 data-i18n="rates.title">Tarifas</h2>
+        <p data-i18n="rates.sub">Una cuota de construcción. Plan mensual opcional para hosting y chat con IA.</p>
+      </div>
+
+      <div class="rate-group">
+        <span class="label" data-i18n="rates.buildLabel">CONSTRUCCIÓN — PAGO ÚNICO</span>
+        <div class="rate-cards">
+          <div class="rate-card">
+            <span class="tier" data-i18n="rates.b1tier">Sitio estándar</span>
+            <span class="price mono">$6,000 <span class="unit">MXN</span></span>
+            <ul>
+              <li data-i18n="rates.b1l1">Sitio bilingüe EN/ES completo</li>
+              <li data-i18n="rates.b1l2">Páginas de propiedades dinámicas, integradas en el sitio</li>
+              <li data-i18n="rates.b1l3">Panel de administración y botón de WhatsApp</li>
+              <li data-i18n="rates.b1l4">Analítica y hosting de imágenes incluidos</li>
+            </ul>
+          </div>
+          <div class="rate-card featured">
+            <span class="tier" data-i18n="rates.b2tier">Con chat con IA</span>
+            <span class="price mono">$10,000 <span class="unit">MXN</span></span>
+            <ul>
+              <li data-i18n="rates.b2l1">Todo lo del sitio estándar</li>
+              <li data-i18n="rates.b2l2">Widget de chat con IA bilingüe 24/7</li>
+              <li data-i18n="rates.b2l3">Configurado para responder sobre tus propiedades</li>
+            </ul>
+          </div>
+        </div>
+        <p class="rate-note" data-i18n="rates.buildNote">Hosting y dominio se facturan por separado — ver planes mensuales.</p>
+      </div>
+
+      <div class="rate-group">
+        <span class="label" data-i18n="rates.monthlyLabel">PLAN MENSUAL</span>
+        <div class="rate-cards">
+          <div class="rate-card">
+            <span class="tier" data-i18n="rates.m1tier">Solo hosting</span>
+            <span class="price mono">$400 <span class="unit">MXN/mes</span></span>
+            <ul>
+              <li data-i18n="rates.m1l1">Hosting en Cloudflare</li>
+              <li data-i18n="rates.m1l2">Gestión de dominio</li>
+              <li data-i18n="rates.m1l3">Monitoreo de actividad</li>
+            </ul>
+          </div>
+          <div class="rate-card">
+            <span class="tier" data-i18n="rates.m2tier">Hosting + chat con IA</span>
+            <span class="price mono">$850 <span class="unit">MXN/mes</span></span>
+            <ul>
+              <li data-i18n="rates.m2l1">Incluye 500 mensajes de chat al mes</li>
+              <li data-i18n="rates.m2l2">Excedente cobrado a costo, sin margen adicional</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-body">
+      <span class="eyebrow" data-i18n="about.eyebrow">Sobre mí</span>
+      <h3 data-i18n="about.title">Construido por un agente, no solo por un programador</h3>
+      <p data-i18n="about.body">Craig Verbeck — agente inmobiliario en At Home Realty, Vicepresidente de Patrocinios de AMPI Playa del Carmen y miembro NAR/Realtor, con más de 11 años operando en la Riviera Maya. Construyo el mismo sistema que uso en mi propio negocio, así que sé qué realmente se usa y qué solo se ve bien en una demostración.</p>
+      <div class="badges">
+        <span class="chip">At Home Realty</span>
+        <span class="chip">AMPI</span>
+        <span class="chip">NAR / Realtor</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cta-block">
+      <div>
+        <h2 data-i18n="footer.title">Hablemos de tu sitio.</h2>
+        <p class="contact-line">craig.verbeck@expmexico.mx · +52 984 213 6512</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="footer.cta1">Agendar llamada</a>
+        <a class="btn btn-ghost" href="https://wa.me/529842136512" target="_blank" rel="noopener" data-i18n="footer.cta2">WhatsApp</a>
+      </div>
+    </div>
+    <div class="fine-print">
+      <span data-i18n="footer.fine">Real Tech for Realtors — un servicio de Craig Verbeck</span>
+      <span class="mono">exprealtymx.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var I18N = {
+    en: {
+      "nav.specs":"Specs","nav.comps":"Portfolio","nav.rates":"Rates","nav.about":"About","nav.cta":"Book a call",
+      "hero.eyebrow":"Website design for Riviera Maya agents and small businesses",
+      "hero.title":"Your business, with a proper spec sheet.",
+      "hero.lede":"Built by a real estate agent who's run this exact system on his own site for years — bilingual from day one and live in under a month.",
+      "hero.cta1":"Book a call","hero.cta2":"WhatsApp Craig",
+      "hero.stat1k":"years","hero.stat1v":"Operating in the Riviera Maya",
+      "hero.stat2v":"VP of Sponsorships",
+      "hero.stat3v":"Multilingual builds",
+      "specs.eyebrow":"Spec sheet","specs.title":"The spec sheet","specs.sub":"Every build ships with the same fundamentals that run my own business — no generic templates.",
+      "specs.r1k":"LANGUAGES","specs.r1v":"Bilingual EN/ES by default, FR on request, with a switcher on every page",
+      "specs.r2k":"PROPERTY PAGES","specs.r2v":"Dynamic pages built directly into the site — update your own listings, no live MLS feed required",
+      "specs.r3k":"ADMIN PANEL","specs.r3v":"Password-protected — update listings without needing a developer",
+      "specs.r4k":"LEAD CAPTURE","specs.r4v":"Floating WhatsApp button plus contact forms",
+      "specs.r5k":"HOSTING","specs.r5v":"Cloudflare Pages with a global CDN and continuous deployment from GitHub",
+      "specs.r6k":"ANALYTICS","specs.r6v":"Google Analytics wired in from day one",
+      "specs.r7k":"IMAGES","specs.r7v":"Hosted on Cloudinary and optimized automatically",
+      "specs.r8k":"AI CHAT (OPTIONAL)","specs.r8v":"24/7 bilingual chat widget, usage-capped so costs stay predictable",
+      "comps.eyebrow":"Portfolio","comps.title":"Portfolio","comps.sub":"Three builds already live on this exact system.",
+      "comps.c1title":"My own brokerage site",
+      "comps.c1desc":"Dynamic property pages, a sitewide EN/ES switcher, and a password-protected admin panel.",
+      "comps.c1s1":"EN / ES","comps.c1s2":"Home · Properties · Contact",
+      "comps.c2title":"Copal Real Estate",
+      "comps.c2desc":"Jérémie Séverin's agency in Playa del Carmen. Five-page structure, custom illustration work in the service sections.",
+      "comps.c2s2":"Home · Services · Destinations · Contact",
+      "comps.c3title":"At Home Riviera Maya",
+      "comps.c3desc":"Vacation property management across Playa del Carmen, Akumal, and Puerto Aventuras — with a digital guest guidebook for every unit, accessed by QR code.",
+      "comps.c3s2":"Guest guidebooks",
+      "rates.eyebrow":"Rate sheet","rates.title":"Rate sheet","rates.sub":"One build fee. Optional monthly plan for hosting and AI chat.",
+      "rates.buildLabel":"BUILD — ONE-TIME","rates.b1tier":"Standard build",
+      "rates.b1l1":"Full bilingual EN/ES site","rates.b1l2":"Dynamic property pages, built right into the site","rates.b1l3":"Admin panel and WhatsApp button","rates.b1l4":"Analytics and image hosting included",
+      "rates.b2tier":"With AI chat","rates.b2l1":"Everything in the standard build","rates.b2l2":"24/7 bilingual AI chat widget","rates.b2l3":"Configured to answer questions on your listings",
+      "rates.buildNote":"Hosting and domain billed separately — see the monthly plans below.",
+      "rates.monthlyLabel":"MONTHLY PLAN","rates.m1tier":"Hosting only",
+      "rates.m1l1":"Cloudflare hosting","rates.m1l2":"Domain management","rates.m1l3":"Uptime monitoring",
+      "rates.m2tier":"Hosting + AI chat","rates.m2l1":"Includes 500 chat messages per month","rates.m2l2":"Overage billed at cost, no added margin",
+      "about.eyebrow":"About","about.title":"Built by an agent, not just a developer",
+      "about.body":"Craig Verbeck — real estate agent with At Home Realty, Vice President of Sponsorships for AMPI Playa del Carmen, and an NAR/Realtor member with 11+ years operating in the Riviera Maya. I build the same system I run my own business on — so I know what actually gets used, and what just looks good in a demo.",
+      "footer.title":"Let's talk about your site.","footer.cta1":"Book a call","footer.cta2":"WhatsApp",
+      "footer.fine":"Real Tech for Realtors — a service of Craig Verbeck"
+    },
+    es: {
+      "nav.specs":"Ficha técnica","nav.comps":"Portafolio","nav.rates":"Tarifas","nav.about":"Sobre mí","nav.cta":"Agendar llamada",
+      "hero.eyebrow":"Diseño web para agentes y negocios de la Riviera Maya",
+      "hero.title":"Tu negocio, con ficha técnica propia.",
+      "hero.lede":"Construido por un agente inmobiliario que ha operado este mismo sistema en su propio sitio durante años — bilingüe desde el inicio y en línea en menos de un mes.",
+      "hero.cta1":"Agendar llamada","hero.cta2":"WhatsApp con Craig",
+      "hero.stat1k":"años","hero.stat1v":"Operando en la Riviera Maya",
+      "hero.stat2v":"Vicepresidente de Patrocinios",
+      "hero.stat3v":"Sitios multilingües",
+      "specs.eyebrow":"Ficha técnica","specs.title":"La ficha técnica","specs.sub":"Cada sitio incluye lo mismo que corre mi propio negocio — nada de plantillas genéricas.",
+      "specs.r1k":"IDIOMAS","specs.r1v":"Bilingüe EN/ES por defecto, FR bajo pedido, con selector en cada página",
+      "specs.r2k":"PÁGINAS DE PROPIEDADES","specs.r2v":"Dinámicas e integradas directamente en el sitio — actualiza tus propiedades tú mismo, sin depender de un feed de MLS",
+      "specs.r3k":"PANEL DE ADMINISTRACIÓN","specs.r3v":"Protegido con contraseña — actualiza propiedades sin depender de un programador",
+      "specs.r4k":"CAPTACIÓN DE LEADS","specs.r4v":"Botón flotante de WhatsApp más formularios de contacto",
+      "specs.r5k":"HOSTING","specs.r5v":"Cloudflare Pages con CDN global y despliegue continuo desde GitHub",
+      "specs.r6k":"ANALÍTICA","specs.r6v":"Google Analytics integrado desde el primer día",
+      "specs.r7k":"IMÁGENES","specs.r7v":"Alojadas en Cloudinary y optimizadas automáticamente",
+      "specs.r8k":"CHAT CON IA (OPCIONAL)","specs.r8v":"Widget de chat bilingüe 24/7, con límite de uso para que el costo sea predecible",
+      "comps.eyebrow":"Portafolio","comps.title":"Portafolio","comps.sub":"Tres sitios ya en operación con este mismo sistema.",
+      "comps.c1title":"Mi propio sitio de corretaje",
+      "comps.c1desc":"Páginas dinámicas de propiedades, selector EN/ES en todo el sitio y panel de administración protegido con contraseña.",
+      "comps.c1s1":"EN / ES","comps.c1s2":"Inicio · Propiedades · Contacto",
+      "comps.c2title":"Copal Real Estate",
+      "comps.c2desc":"Agencia de Jérémie Séverin en Playa del Carmen. Estructura de cinco páginas, ilustraciones personalizadas en las secciones de servicio.",
+      "comps.c2s2":"Inicio · Servicios · Destinos · Contacto",
+      "comps.c3title":"At Home Riviera Maya",
+      "comps.c3desc":"Gestión de propiedades vacacionales en Playa del Carmen, Akumal y Puerto Aventuras — con una guía digital para huéspedes en cada unidad, accesible por código QR.",
+      "comps.c3s2":"Guías de huéspedes",
+      "rates.eyebrow":"Tarifas","rates.title":"Tarifas","rates.sub":"Una cuota de construcción. Plan mensual opcional para hosting y chat con IA.",
+      "rates.buildLabel":"CONSTRUCCIÓN — PAGO ÚNICO","rates.b1tier":"Sitio estándar",
+      "rates.b1l1":"Sitio bilingüe EN/ES completo","rates.b1l2":"Páginas de propiedades dinámicas, integradas en el sitio","rates.b1l3":"Panel de administración y botón de WhatsApp","rates.b1l4":"Analítica y hosting de imágenes incluidos",
+      "rates.b2tier":"Con chat con IA","rates.b2l1":"Todo lo del sitio estándar","rates.b2l2":"Widget de chat con IA bilingüe 24/7","rates.b2l3":"Configurado para responder sobre tus propiedades",
+      "rates.buildNote":"Hosting y dominio se facturan por separado — ver planes mensuales.",
+      "rates.monthlyLabel":"PLAN MENSUAL","rates.m1tier":"Solo hosting",
+      "rates.m1l1":"Hosting en Cloudflare","rates.m1l2":"Gestión de dominio","rates.m1l3":"Monitoreo de actividad",
+      "rates.m2tier":"Hosting + chat con IA","rates.m2l1":"Incluye 500 mensajes de chat al mes","rates.m2l2":"Excedente cobrado a costo, sin margen adicional",
+      "about.eyebrow":"Sobre mí","about.title":"Construido por un agente, no solo por un programador",
+      "about.body":"Craig Verbeck — agente inmobiliario en At Home Realty, Vicepresidente de Patrocinios de AMPI Playa del Carmen y miembro NAR/Realtor, con más de 11 años operando en la Riviera Maya. Construyo el mismo sistema que uso en mi propio negocio, así que sé qué realmente se usa y qué solo se ve bien en una demostración.",
+      "footer.title":"Hablemos de tu sitio.","footer.cta1":"Agendar llamada","footer.cta2":"WhatsApp",
+      "footer.fine":"Real Tech for Realtors — un servicio de Craig Verbeck"
+    },
+    fr: {
+      "nav.specs":"Fiche technique","nav.comps":"Portfolio","nav.rates":"Tarifs","nav.about":"À propos","nav.cta":"Réserver un appel",
+      "hero.eyebrow":"Création de sites web pour agents et commerces de la Riviera Maya",
+      "hero.title":"Votre activité, avec sa propre fiche technique.",
+      "hero.lede":"Conçu par un agent immobilier qui utilise ce même système sur son propre site depuis des années — bilingue dès le départ et en ligne en moins d'un mois.",
+      "hero.cta1":"Réserver un appel","hero.cta2":"WhatsApp avec Craig",
+      "hero.stat1k":"ans","hero.stat1v":"Actif dans la Riviera Maya",
+      "hero.stat2v":"Vice-président des partenariats",
+      "hero.stat3v":"Sites multilingues",
+      "specs.eyebrow":"Fiche technique","specs.title":"La fiche technique","specs.sub":"Chaque site inclut les mêmes fondamentaux que celui de ma propre agence — aucun modèle générique.",
+      "specs.r1k":"LANGUES","specs.r1v":"Bilingue EN/ES par défaut, FR sur demande, avec sélecteur sur chaque page",
+      "specs.r2k":"PAGES DE PROPRIÉTÉS","specs.r2v":"Dynamiques et intégrées directement au site — mettez à jour vos annonces vous-même, sans dépendre d'un flux MLS",
+      "specs.r3k":"PANNEAU D'ADMINISTRATION","specs.r3v":"Protégé par mot de passe — mettez à jour vos annonces sans développeur",
+      "specs.r4k":"CAPTURE DE PROSPECTS","specs.r4v":"Bouton WhatsApp flottant et formulaires de contact",
+      "specs.r5k":"HÉBERGEMENT","specs.r5v":"Cloudflare Pages avec CDN mondial et déploiement continu depuis GitHub",
+      "specs.r6k":"ANALYTIQUE","specs.r6v":"Google Analytics intégré dès le premier jour",
+      "specs.r7k":"IMAGES","specs.r7v":"Hébergées sur Cloudinary et optimisées automatiquement",
+      "specs.r8k":"CHAT IA (EN OPTION)","specs.r8v":"Widget de chat bilingue 24/7, usage plafonné pour des coûts prévisibles",
+      "comps.eyebrow":"Portfolio","comps.title":"Portfolio","comps.sub":"Trois sites déjà en ligne avec ce même système.",
+      "comps.c1title":"Mon propre site de courtage",
+      "comps.c1desc":"Pages de propriétés dynamiques, sélecteur EN/ES sur tout le site et panneau d'administration protégé par mot de passe.",
+      "comps.c1s1":"EN / ES","comps.c1s2":"Accueil · Propriétés · Contact",
+      "comps.c2title":"Copal Real Estate",
+      "comps.c2desc":"L'agence de Jérémie Séverin à Playa del Carmen. Structure à cinq pages, illustrations sur mesure dans les sections de services.",
+      "comps.c2s2":"Accueil · Services · Destinations · Contact",
+      "comps.c3title":"At Home Riviera Maya",
+      "comps.c3desc":"Gestion de propriétés de vacances à Playa del Carmen, Akumal et Puerto Aventuras — avec un guide d'accueil numérique pour chaque unité, accessible par code QR.",
+      "comps.c3s2":"Guides d'accueil",
+      "rates.eyebrow":"Tarifs","rates.title":"Tarifs","rates.sub":"Un forfait de création. Formule mensuelle optionnelle pour l'hébergement et le chat IA.",
+      "rates.buildLabel":"CRÉATION — PAIEMENT UNIQUE","rates.b1tier":"Site standard",
+      "rates.b1l1":"Site bilingue EN/ES complet","rates.b1l2":"Pages de propriétés dynamiques, intégrées directement au site","rates.b1l3":"Panneau d'administration et bouton WhatsApp","rates.b1l4":"Analytique et hébergement d'images inclus",
+      "rates.b2tier":"Avec chat IA","rates.b2l1":"Tout ce qui est inclus dans le site standard","rates.b2l2":"Widget de chat IA bilingue 24/7","rates.b2l3":"Configuré pour répondre aux questions sur vos annonces",
+      "rates.buildNote":"Hébergement et nom de domaine facturés séparément — voir les formules mensuelles ci-dessous.",
+      "rates.monthlyLabel":"FORMULE MENSUELLE","rates.m1tier":"Hébergement seul",
+      "rates.m1l1":"Hébergement Cloudflare","rates.m1l2":"Gestion du domaine","rates.m1l3":"Surveillance de disponibilité",
+      "rates.m2tier":"Hébergement + chat IA","rates.m2l1":"Inclut 500 messages de chat par mois","rates.m2l2":"Dépassement facturé au coût réel, sans marge",
+      "about.eyebrow":"À propos","about.title":"Conçu par un agent, pas seulement par un développeur",
+      "about.body":"Craig Verbeck — agent immobilier chez At Home Realty, vice-président des partenariats pour AMPI Playa del Carmen et membre NAR/Realtor avec plus de 11 ans d'expérience dans la Riviera Maya. Je construis le même système que celui de ma propre agence — je sais donc ce qui est vraiment utilisé, et ce qui n'est beau que dans une démo.",
+      "footer.title":"Parlons de votre site.","footer.cta1":"Réserver un appel","footer.cta2":"WhatsApp",
+      "footer.fine":"Real Tech for Realtors — un service de Craig Verbeck"
+    }
+  };
+
+  function applyLang(lang){
+    var dict = I18N[lang] || I18N.es;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    document.documentElement.setAttribute('lang', lang);
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+  });
+
+  applyLang('es');
+})();
+</script>
+
+</body>
+</html>
