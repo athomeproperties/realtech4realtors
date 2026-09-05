@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Real Tech for Realtors</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
   :root{
     --bg:#ECEAE2;
@@ -17,6 +17,7 @@
     --accent:#0E6B64;
     --accent-ink:#FBFAF6;
     --brass:#8C6A26;
+    --logo-accent:#C0532D;
     --shadow: 0 1px 0 rgba(33,29,25,0.06);
   }
   @media (prefers-color-scheme: dark){
@@ -30,6 +31,7 @@
       --accent:#2FB4A9;
       --accent-ink:#0B1917;
       --brass:#D2A855;
+      --logo-accent:#E37A54;
       --shadow: 0 1px 0 rgba(0,0,0,0.3);
     }
   }
@@ -43,6 +45,7 @@
     --accent:#2FB4A9;
     --accent-ink:#0B1917;
     --brass:#D2A855;
+    --logo-accent:#E37A54;
     --shadow: 0 1px 0 rgba(0,0,0,0.3);
   }
 
@@ -94,13 +97,16 @@
     gap:16px; padding:16px clamp(20px,4vw,48px);
   }
   .brand{
-    font-family:'Zilla Slab', serif; font-weight:700; font-size:1.05rem;
-    letter-spacing:-0.01em;
-    display:flex; align-items:baseline; gap:8px;
+    display:flex; align-items:baseline; gap:10px;
   }
-  .brand .mark{
-    display:inline-block; width:9px; height:9px; border-radius:2px;
-    background:var(--accent); transform:rotate(45deg);
+  .brand .logo-mark{
+    font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:1.28rem;
+    letter-spacing:-0.02em; line-height:1; white-space:nowrap;
+  }
+  .brand .logo-mark .four{color:var(--logo-accent);}
+  .brand .brand-full{
+    font-family:'Zilla Slab', serif; font-weight:700; font-size:0.98rem;
+    letter-spacing:-0.01em; white-space:nowrap;
   }
   nav.links{display:flex; align-items:center; gap:22px;}
   nav.links a.section-link{
@@ -131,6 +137,13 @@
 
   @media (max-width:760px){
     nav.links{display:none;}
+  }
+  @media (max-width:600px){
+    .nav-row{flex-wrap:wrap; row-gap:12px;}
+    .nav-cta{width:100%; justify-content:space-between;}
+  }
+  @media (max-width:400px){
+    .brand .brand-full{display:none;}
   }
 
   /* ---------- hero ---------- */
@@ -254,7 +267,10 @@
 
 <header class="nav">
   <div class="nav-row">
-    <div class="brand"><span class="mark"></span> Real Tech for Realtors</div>
+    <div class="brand">
+      <span class="logo-mark"><span>R</span><span class="four">4</span><span>R</span></span>
+      <span class="brand-full">Real Tech for Realtors</span>
+    </div>
     <nav class="links">
       <a class="section-link" href="#specs" data-i18n="nav.specs">Ficha técnica</a>
       <a class="section-link" href="#comps" data-i18n="nav.comps">Portafolio</a>
