@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Close CRM — Respuestas instantáneas para agentes inmobiliarios</title>
+<meta name="description" content="CRM y automatización de WhatsApp y correo hecho específicamente para agentes y agencias inmobiliarias.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b3d3a;
+    --ink-soft:#134a45;
+    --paper:#fdfaf5;
+    --paper-dim:#f3ecdd;
+    --gold:#c9a227;
+    --gold-light:#e9c874;
+    --sage:#3f6e63;
+    --text:#152321;
+    --text-soft:#4b5c59;
+    --line: rgba(11,61,58,0.14);
+    --radius: 18px;
+    --maxw: 1120px;
+    --shadow: 0 20px 50px -25px rgba(11,61,58,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'DM Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .serif{
+    font-family:'Cormorant Garamond', serif;
+    color:var(--ink);
+    font-weight:600;
+    margin:0;
+    line-height:1.05;
+  }
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  img,svg{display:block;}
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+  section{padding:96px 0;}
+  @media(max-width:640px){ section{padding:64px 0;} .wrap{padding:0 20px;} }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(253,250,245,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .headbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand span{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700; font-size:22px; color:var(--ink);
+    letter-spacing:0.2px;
+  }
+  .lang-toggle{
+    display:flex; border:1.5px solid var(--ink); border-radius:999px; overflow:hidden;
+    font-family:'DM Sans'; font-size:13px; font-weight:600;
+  }
+  .lang-toggle button{
+    border:none; background:transparent; color:var(--ink);
+    padding:8px 16px; cursor:pointer; transition:.25s;
+  }
+  .lang-toggle button.active{ background:var(--ink); color:var(--paper); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:72px 32px 40px 56px;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  @media(max-width:900px){ .hero{ grid-template-columns:1fr; padding:40px 24px 0; gap:48px; } }
+
+  .eyebrow{
+    font-family:'DM Sans'; font-weight:600; font-size:12.5px; letter-spacing:2.5px;
+    text-transform:uppercase; color:var(--sage); margin-bottom:18px; display:block;
+  }
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 56px);
+    letter-spacing:-0.3px;
+  }
+  .hero p.lead{
+    font-family:'DM Sans'; font-size:17.5px; line-height:1.65; color:var(--text-soft);
+    max-width:480px; margin-top:22px;
+  }
+  .cta-row{ margin-top:34px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .btn-wa{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--ink); color:var(--paper); text-decoration:none;
+    padding:16px 26px; border-radius:999px; font-weight:600; font-size:15.5px;
+    box-shadow:var(--shadow);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-wa:hover{ transform:translateY(-2px); }
+  .btn-wa svg{width:20px;height:20px;flex:none;}
+  .micro{ font-size:13px; color:var(--text-soft); }
+
+  /* phone mockup */
+  .phone-stage-wrap{ display:flex; flex-direction:column; align-items:center; gap:20px; }
+  .channel-chips{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .channel-chips span{
+    font-family:'DM Sans'; font-size:12.5px; font-weight:600; color:var(--sage);
+    background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px;
+  }
+  .phone-stage{ display:flex; justify-content:center; }
+  .phone{
+    width:290px; background:var(--ink); border-radius:34px; padding:12px;
+    box-shadow:var(--shadow);
+  }
+  .phone-screen{
+    background:var(--paper-dim); border-radius:24px; padding:16px 14px 18px;
+    min-height:400px; display:flex; flex-direction:column;
+  }
+  .phone-head{
+    display:flex; align-items:center; gap:10px; padding-bottom:12px; margin-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .phone-avatar{ width:34px; height:34px; border-radius:50%; background:var(--gold); flex:none; }
+  .phone-head .name{ font-family:'DM Sans'; font-weight:700; font-size:13.5px; color:var(--ink); }
+  .phone-head .status{ font-size:11px; color:var(--sage); font-weight:600; }
+  .bubble{
+    max-width:82%; padding:10px 13px; border-radius:14px; font-size:13px; line-height:1.4;
+    margin-bottom:10px; opacity:0; transform:translateY(6px);
+    animation: bubbleIn .5s ease forwards;
+  }
+  .bubble.in{ background:#fff; color:var(--text); border-bottom-left-radius:4px; align-self:flex-start; }
+  .bubble.out{ background:var(--gold); color:#26210a; border-bottom-right-radius:4px; align-self:flex-end; font-weight:500; }
+  @keyframes bubbleIn{ to{opacity:1; transform:translateY(0);} }
+  .typing{
+    align-self:flex-end; display:flex; gap:4px; padding:10px 13px; background:var(--gold-light);
+    border-radius:14px; border-bottom-right-radius:4px; width:fit-content; margin-bottom:10px;
+    opacity:0; animation: bubbleIn .4s ease forwards;
+  }
+  .typing i{ width:5px; height:5px; border-radius:50%; background:#5a4a10; opacity:.6; animation:blink 1s infinite; }
+  .typing i:nth-child(2){ animation-delay:.15s; } .typing i:nth-child(3){ animation-delay:.3s; }
+  @keyframes blink{ 0%,80%,100%{opacity:.25;} 40%{opacity:.9;} }
+  .timer-row{
+    margin-top:auto; padding-top:14px; border-top:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .timer-label{ font-size:10.5px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-soft); font-weight:600; }
+  .timer-value{ font-size:15px; color:var(--ink); font-weight:600; }
+  @media(prefers-reduced-motion: reduce){
+    .bubble, .typing{ animation:none; opacity:1; transform:none; }
+  }
+
+  /* ---------- compare ---------- */
+  .compare-head{ max-width:640px; margin:0 auto 48px; text-align:center; }
+  .compare-head h2{ font-size:clamp(28px,3.4vw,40px); }
+  .compare-grid{ display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  @media(max-width:760px){ .compare-grid{ grid-template-columns:1fr; } }
+  .compare-card{ border-radius:var(--radius); padding:32px 28px; }
+  .compare-card.no{ background:var(--paper-dim); border:1px solid var(--line); }
+  .compare-card.yes{ background:var(--ink); color:var(--paper); }
+  .compare-card h3{ font-family:'DM Sans'; font-size:14px; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:18px; font-weight:700; }
+  .compare-card.no h3{ color:var(--sage); }
+  .compare-card.yes h3{ color:var(--gold-light); }
+  .compare-card ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .compare-card li{ font-size:15px; line-height:1.5; padding-left:24px; position:relative; }
+  .compare-card.no li:before{ content:"–"; position:absolute; left:0; color:var(--text-soft); font-weight:700; }
+  .compare-card.yes li:before{ content:"✓"; position:absolute; left:0; color:var(--gold-light); font-weight:700; }
+
+  /* ---------- features ---------- */
+  .features-head{ max-width:640px; margin:0 auto 52px; text-align:center; }
+  .features-head h2{ font-size:clamp(28px,3.4vw,40px); }
+  .features-section{ padding-top:56px; padding-bottom:56px; }
+  @media(max-width:640px){ .features-section{ padding-top:36px; padding-bottom:36px; } }
+  .feat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  @media(max-width:900px){ .feat-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:600px){ .feat-grid{ grid-template-columns:1fr; } }
+  .feat-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px 24px;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .feat-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
+  .feat-icon{
+    width:42px; height:42px; border-radius:10px; background:var(--ink);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .feat-icon svg{ width:22px; height:22px; stroke:var(--gold-light); }
+  .feat-card h3{ font-family:'DM Sans'; font-weight:700; font-size:16.5px; color:var(--ink); margin-bottom:8px; }
+  .feat-card p{ font-size:14px; line-height:1.55; color:var(--text-soft); }
+
+  /* ---------- pricing ---------- */
+  .pricing{ background:var(--ink); color:var(--paper); }
+  .pricing-head{ max-width:640px; margin:0 auto 12px; text-align:center; }
+  .pricing-head .eyebrow{ color:var(--gold-light); text-align:center; }
+  .pricing-head h2{ color:var(--paper); font-size:clamp(28px,3.4vw,40px); }
+  .pricing-head p{ color:#cfe0dc; margin-top:14px; font-size:16px; }
+  .price-grid{ margin-top:52px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media(max-width:640px){ .price-grid{ grid-template-columns:1fr; } }
+  .price-card{
+    background:var(--ink-soft); border:1px solid rgba(233,200,116,0.25); border-radius:16px;
+    padding:28px 22px; display:flex; flex-direction:column;
+  }
+  .price-card.primary{ border-color:var(--gold); background:linear-gradient(160deg, var(--ink-soft), #0e453f); }
+  .price-card .tier{ font-family:'DM Sans'; font-weight:700; font-size:15px; color:var(--gold-light); text-transform:uppercase; letter-spacing:1px; }
+  .price-card .who{ font-size:14px; color:#bcd2cd; margin-top:6px; margin-bottom:22px; line-height:1.5; }
+  .price-card .amount{ font-family:'Cormorant Garamond'; font-size:52px; color:var(--paper); font-weight:700; }
+  .price-card .amount sup{ font-size:19px; font-weight:600; top:-20px; position:relative; margin-right:2px; }
+  .price-card .amount .per{ font-family:'DM Sans'; font-size:15px; color:#a9c2bc; font-weight:500; }
+  .price-card .amount-label{ font-size:12.5px; color:#a9c2bc; margin-top:6px; }
+
+  .setup-block{
+    margin-top:44px; border-top:1px solid rgba(233,200,116,0.2); padding-top:34px;
+  }
+  .setup-block .setup-head{ text-align:center; margin-bottom:24px; }
+  .setup-block .setup-head span{ font-size:13px; text-transform:uppercase; letter-spacing:1.5px; color:var(--gold-light); font-weight:700; }
+  .setup-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:14px;
+  }
+  .setup-card{
+    background:rgba(255,255,255,0.04); border:1px solid rgba(233,200,116,0.16); border-radius:12px;
+    padding:20px 18px; text-align:center;
+  }
+  .setup-card .tier{ font-size:13px; color:#e5efec; font-weight:600; margin-bottom:10px; line-height:1.4; }
+  .setup-card .amount{ font-family:'Cormorant Garamond'; font-size:26px; color:var(--gold-light); font-weight:700; display:flex; align-items:baseline; justify-content:center; gap:2px; }
+  .setup-card .amount .sign{ font-size:14px; font-weight:600; }
+  .setup-card .amount-label{ font-size:11px; color:#a9c2bc; margin-top:2px; }
+
+  .whatsapp-block{
+    margin-top:44px; border-top:1px solid rgba(233,200,116,0.2); padding-top:34px;
+  }
+  .whatsapp-block .setup-head{ text-align:center; margin-bottom:24px; }
+  .whatsapp-list{ list-style:none; margin:0; padding:0; max-width:360px; margin-left:auto; margin-right:auto; }
+  .whatsapp-list li{
+    background:rgba(255,255,255,0.04); border:1px solid rgba(233,200,116,0.16); border-radius:12px;
+    padding:18px 18px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+
+  /* ---------- credibility ---------- */
+  .cred{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  @media(max-width:860px){ .cred{ grid-template-columns:1fr; gap:32px; } }
+  .cred-section{ padding-top:56px; }
+  @media(max-width:640px){ .cred-section{ padding-top:36px; } }
+  .cred h2{ font-size:clamp(26px,3vw,36px); margin-bottom:18px; }
+  .cred p{ color:var(--text-soft); font-size:16px; line-height:1.7; }
+  .badges{ display:flex; flex-direction:column; gap:14px; }
+  .badge{
+    display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--line);
+    border-radius:12px; padding:16px 18px;
+  }
+  .badge .num{ font-family:'JetBrains Mono'; font-weight:600; font-size:15px; color:var(--gold); width:52px; flex:none; }
+  .badge .lab{ font-size:14.5px; color:var(--text); font-weight:600; }
+
+  /* ---------- final cta ---------- */
+  .final{ text-align:center; padding-bottom:56px; }
+  @media(max-width:640px){ .final{ padding-bottom:36px; } }
+  .final h2{ font-size:clamp(30px,4vw,46px); max-width:680px; margin:0 auto; }
+  .final p{ color:var(--text-soft); font-size:16.5px; margin-top:18px; max-width:520px; margin-left:auto; margin-right:auto; }
+  .final .cta-row{ justify-content:center; margin-top:32px; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:1px solid var(--line); padding:36px 0; }
+  .foot-wrap{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+  }
+  .foot-wrap .contact{ font-size:14px; color:var(--text-soft); }
+  .foot-wrap .contact a{ text-decoration:none; color:var(--ink); font-weight:600; }
+  .foot-note{ font-size:12.5px; color:#8a9895; max-width:var(--maxw); margin:18px auto 0; padding:0 28px; }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.show{ opacity:1; transform:translateY(0); }
+  @media(prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="16" r="11" fill="#0b3d3a" stroke="#c9a227" stroke-width="1.6"/>
+        <rect x="13" y="3.5" width="4" height="3.5" rx="1.2" fill="#c9a227"/>
+        <path d="M9.5 15.3 L15 11 L20.5 15.3 Z" fill="#c9a227"/>
+        <rect x="10.6" y="15.3" width="8.8" height="6.2" fill="#c9a227"/>
+      </svg>
+      <span>Quick Close CRM</span>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language toggle">
+      <button type="button" data-lang="es" class="active" onclick="setLang('es')">ES</button>
+      <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero wrap">
+  <div>
+    <span class="eyebrow" data-es="CRM para agentes y agencias inmobiliarias" data-en="CRM for real estate agents and agencies">CRM para agentes y agencias inmobiliarias</span>
+    <h1 data-es="Un CRM completo para vender más, sin perseguir cada lead a mano." data-en="A complete CRM to sell more, without chasing every lead by hand.">Un CRM completo para vender más, sin perseguir cada lead a mano.</h1>
+    <p class="lead" data-es="Quick Close CRM organiza tus prospectos y clientes, automatiza tu seguimiento y agenda tus citas — todo en un solo lugar, diseñado específicamente para bienes raíces." data-en="Quick Close CRM organizes your prospects and clients, automates your follow-up, and books your appointments — all in one place, built specifically for real estate.">Quick Close CRM organiza tus prospectos y clientes, automatiza tu seguimiento y agenda tus citas — todo en un solo lugar, diseñado específicamente para bienes raíces.</p>
+    <div class="cta-row">
+      <a class="btn-wa" href="https://wa.me/529842136512?text=Me%20gustar%C3%ADa%20tener%20mas%20informaci%C3%B3n%20sobre%20Quick%20Close%20CRM." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm5.8 14.07c-.24.68-1.4 1.31-1.93 1.35-.5.05-1 .24-3.36-.7-2.83-1.13-4.66-3.99-4.8-4.17-.14-.19-1.15-1.53-1.15-2.92 0-1.39.73-2.07.99-2.35.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.81 2 .88 2.15.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.37-.44.5-.14.14-.29.3-.13.58.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.29 1.42.28.14.44.12.6-.07.17-.19.72-.84.91-1.13.19-.28.38-.24.63-.14.26.09 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.17 1.35Z"/></svg>
+        <span data-es="Escríbeme por WhatsApp" data-en="Chat with me on WhatsApp">Escríbeme por WhatsApp</span>
+      </a>
+      <span class="micro" data-es="Respondo personalmente — no es un bot." data-en="I answer personally — not a bot.">Respondo personalmente — no es un bot.</span>
+    </div>
+  </div>
+
+  <div class="phone-stage-wrap">
+    <div class="phone-stage">
+      <div class="phone">
+        <div class="phone-screen" id="phoneScreen">
+          <div class="phone-head">
+            <div class="phone-avatar"></div>
+            <div>
+              <div class="name" data-es="Cliente potencial" data-en="Potential client">Cliente potencial</div>
+              <div class="status" data-es="Ejemplo: respuesta automática" data-en="Example: automated reply">Ejemplo: respuesta automática</div>
+            </div>
+          </div>
+          <div id="chatArea" style="display:flex; flex-direction:column; flex:1;"></div>
+          <div class="timer-row">
+            <span class="timer-label" data-es="Tiempo de respuesta" data-en="Response time">Tiempo de respuesta</span>
+            <span class="timer-value mono" id="timerValue">0.0s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="channel-chips">
+      <span data-es="WhatsApp" data-en="WhatsApp">WhatsApp</span>
+      <span data-es="Correo" data-en="Email">Correo</span>
+      <span data-es="Formularios" data-en="Forms">Formularios</span>
+      <span data-es="Calendario" data-en="Calendar">Calendario</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE ================= -->
+<section class="wrap reveal">
+  <div class="compare-head">
+    <span class="eyebrow" data-es="Por qué importa la velocidad" data-en="Why speed matters">Por qué importa la velocidad</span>
+    <h2 data-es="La velocidad decide quién se queda con la venta." data-en="Speed decides who gets the sale.">La velocidad decide quién se queda con la venta.</h2>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-card no">
+      <h3 data-es="Sin automatización" data-en="Without automation">Sin automatización</h3>
+      <ul>
+        <li data-es="Los leads esperan horas para recibir una respuesta" data-en="Leads wait hours for a reply">Los leads esperan horas para recibir una respuesta</li>
+        <li data-es="Los seguimientos se pierden entre chats y notas sueltas" data-en="Follow-ups get lost between chats and scattered notes">Los seguimientos se pierden entre chats y notas sueltas</li>
+        <li data-es="Divides tu atención entre vender y contestar mensajes" data-en="You split your focus between selling and answering messages">Divides tu atención entre vender y contestar mensajes</li>
+      </ul>
+    </div>
+    <div class="compare-card yes">
+      <h3 data-es="Con Quick Close CRM" data-en="With Quick Close CRM">Con Quick Close CRM</h3>
+      <ul>
+        <li data-es="Respuesta instantánea, sin importar el canal" data-en="Instant response, no matter the channel">Respuesta instantánea, sin importar el canal</li>
+        <li data-es="Cada conversación queda registrada en un solo pipeline" data-en="Every conversation is tracked in one pipeline">Cada conversación queda registrada en un solo pipeline</li>
+        <li data-es="Solo intervienes cuando realmente importa — lo demás corre solo" data-en="You step in only when it counts — the rest runs itself">Solo intervienes cuando realmente importa — lo demás corre solo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="wrap reveal features-section">
+  <div class="features-head">
+    <span class="eyebrow" data-es="Qué incluye" data-en="What's included">Qué incluye</span>
+    <h2 data-es="Todo lo que necesitas, nada que no." data-en="Everything you need, nothing you don't.">Todo lo que necesitas, nada que no.</h2>
+  </div>
+  <div class="feat-grid">
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h6l2 4 4-8 2 4h4"/></svg></div>
+      <h3 data-es="Pipeline de prospectos y clientes" data-en="Prospect & client pipeline">Pipeline de prospectos y clientes</h3>
+      <p data-es="Ve exactamente en qué etapa está cada lead, desde el primer mensaje hasta el cierre." data-en="See exactly where every lead stands, from first message to closed deal.">Ve exactamente en qué etapa está cada lead, desde el primer mensaje hasta el cierre.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.36A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8 12h8M8 9h5"/></svg></div>
+      <h3 data-es="Automatización de seguimiento multicanal" data-en="Multichannel follow-up automation">Automatización de seguimiento multicanal</h3>
+      <p data-es="Secuencias automáticas por WhatsApp, correo y SMS que suenan como tú, no como un robot." data-en="Automatic sequences by WhatsApp, email, and SMS that sound like you, not a robot.">Secuencias automáticas por WhatsApp, correo y SMS que suenan como tú, no como un robot.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+      <h3 data-es="Agenda integrada" data-en="Built-in scheduling">Agenda integrada</h3>
+      <p data-es="Los leads agendan citas directo en tu calendario — sin ida y vuelta." data-en="Leads book showings directly on your calendar — no back-and-forth.">Los leads agendan citas directo en tu calendario — sin ida y vuelta.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4Z"/><path d="M8 9h8M8 12h5"/></svg></div>
+      <h3 data-es="Formularios de captación" data-en="Lead capture forms">Formularios de captación</h3>
+      <p data-es="Formularios para tu sitio y anuncios que alimentan directo tu pipeline." data-en="Forms for your site and social ads that feed straight into your pipeline.">Formularios para tu sitio y anuncios que alimentan directo tu pipeline.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V13M10 20V8M16 20V5M4 20h16"/></svg></div>
+      <h3 data-es="Reportes de desempeño" data-en="Performance reporting">Reportes de desempeño</h3>
+      <p data-es="Ve cuántos leads entran, en qué etapa se estancan y qué está funcionando." data-en="See how many leads come in, where they stall, and what's actually working.">Ve cuántos leads entran, en qué etapa se estancan y qué está funcionando.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17.5" cy="9" r="2.3"/><path d="M15.8 14.2c2.6.4 4.7 2.4 4.7 5.8"/></svg></div>
+      <h3 data-es="Gestión de equipo y permisos" data-en="Team management & permissions">Gestión de equipo y permisos</h3>
+      <p data-es="Cada agente ve solo lo que le corresponde; tú ves todo el equipo." data-en="Each agent sees only what's theirs; you see the whole team.">Cada agente ve solo lo que le corresponde; tú ves todo el equipo.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a5 5 0 0 0-5 5v3c0 1-.4 2-1.2 2.8L4 16h16l-1.8-2.2A4 4 0 0 1 17 11V8a5 5 0 0 0-5-5Z"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0"/></svg></div>
+      <h3 data-es="Recordatorios y tareas automáticas" data-en="Automatic reminders & tasks">Recordatorios y tareas automáticas</h3>
+      <p data-es="Nunca se te olvida una llamada de seguimiento, un cumpleaños o una cita." data-en="Never forget a follow-up call, a birthday, or a showing.">Nunca se te olvida una llamada de seguimiento, un cumpleaños o una cita.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <h3 data-es="Verificación y cumplimiento, resueltos" data-en="Verification & compliance, handled">Verificación y cumplimiento, resueltos</h3>
+      <p data-es="Yo me encargo de la configuración técnica de tu mensajería (WhatsApp y SMS) y su cumplimiento." data-en="I handle the technical setup and compliance for your messaging (WhatsApp and SMS).">Yo me encargo de la configuración técnica de tu mensajería (WhatsApp y SMS) y su cumplimiento.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.6 15.7 6.4M8.3 13.4 15.7 17.6"/></svg></div>
+      <h3 data-es="Publica en todas tus redes a la vez" data-en="Post to all your social media at once">Publica en todas tus redes a la vez</h3>
+      <p data-es="Conecta Facebook, Instagram, TikTok, LinkedIn y más — crea una publicación y se envía a todas tus redes desde un solo lugar." data-en="Connect Facebook, Instagram, TikTok, LinkedIn, and more — create one post and it goes out to every platform from a single place.">Conecta Facebook, Instagram, TikTok, LinkedIn y más — crea una publicación y se envía a todas tus redes desde un solo lugar.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+      <h3 data-es="Campañas masivas de correo" data-en="Mass email campaigns">Campañas masivas de correo</h3>
+      <p data-es="Envía boletines y promociones a toda tu base de contactos de un solo golpe, con el mismo diseño y marca en cada envío." data-en="Send newsletters and promotions to your entire contact list at once, with consistent design and branding every time.">Envía boletines y promociones a toda tu base de contactos de un solo golpe, con el mismo diseño y marca en cada envío.</p>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></div>
+      <h3 data-es="Soporte real, no un ticket" data-en="Real support, not a ticket queue">Soporte real, no un ticket</h3>
+      <p data-es="¿Algo falla o necesitas un ajuste? Me escribes directo a mí." data-en="Something breaks or needs adjusting? You message me directly.">¿Algo falla o necesitas un ajuste? Me escribes directo a mí.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="pricing reveal">
+  <div class="wrap">
+    <div class="pricing-head">
+      <span class="eyebrow" data-es="Inversión" data-en="Pricing">Inversión</span>
+      <h2 data-es="Precios pensados para cómo trabajas" data-en="Pricing built for how you work">Precios pensados para cómo trabajas</h2>
+      <p data-es="Configuración única según el tamaño de tu equipo, más una mensualidad fija. Sin contratos forzosos." data-en="One-time setup based on your team size, plus a flat monthly fee. No forced contracts.">Configuración única según el tamaño de tu equipo, más una mensualidad fija. Sin contratos forzosos.</p>
+    </div>
+
+    <div class="price-grid">
+      <div class="price-card primary">
+        <div class="tier" data-es="Mensualidad · Independiente" data-en="Monthly · Independent">Mensualidad · Independiente</div>
+        <div class="who" data-es="Plataforma, mantenimiento de automatizaciones y soporte directo conmigo" data-en="Platform, automation upkeep, and direct support from me">Plataforma, mantenimiento de automatizaciones y soporte directo conmigo</div>
+        <div class="amount"><sup>$</sup>2,500<span class="per" data-es="/mes" data-en="/mo">/mes</span></div>
+        <div class="amount-label" data-es="MXN · agente independiente" data-en="MXN · independent agent">MXN · agente independiente</div>
+      </div>
+      <div class="price-card primary">
+        <div class="tier" data-es="Mensualidad · Agencia" data-en="Monthly · Agency">Mensualidad · Agencia</div>
+        <div class="who" data-es="Plataforma, mantenimiento de automatizaciones y soporte directo conmigo — escala según el tamaño de tu equipo" data-en="Platform, automation upkeep, and direct support from me — scales with your team size">Plataforma, mantenimiento de automatizaciones y soporte directo conmigo — escala según el tamaño de tu equipo</div>
+        <ul class="whatsapp-list" style="max-width:none; margin:0;">
+          <li>
+            <p class="who" data-es="Hasta 10 agentes" data-en="Up to 10 agents">Hasta 10 agentes</p>
+            <span class="amt">$5,000 MXN/mes</span>
+          </li>
+          <li>
+            <p class="who" data-es="11–29 agentes" data-en="11–29 agents">11–29 agentes</p>
+            <span class="amt">$10,000 MXN/mes</span>
+          </li>
+          <li>
+            <p class="who" data-es="30–49 agentes" data-en="30–49 agents">30–49 agentes</p>
+            <span class="amt">$15,000 MXN/mes</span>
+          </li>
+          <li>
+            <p class="who" data-es="50+ agentes" data-en="50+ agents">50+ agentes</p>
+            <span class="amt">$20,000 MXN/mes</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="setup-block">
+      <div class="setup-head">
+        <span data-es="Configuración inicial (pago único, según tamaño de equipo)" data-en="Initial setup (one-time, based on team size)">Configuración inicial (pago único, según tamaño de equipo)</span>
+      </div>
+      <div class="setup-grid">
+        <div class="setup-card">
+          <div class="tier" data-es="Agente independiente" data-en="Independent agent">Agente independiente</div>
+          <div class="amount"><span class="sign">$</span>2,500</div>
+          <div class="amount-label">MXN</div>
+        </div>
+        <div class="setup-card">
+          <div class="tier" data-es="Agencia · hasta 10 agentes" data-en="Agency · up to 10 agents">Agencia · hasta 10 agentes</div>
+          <div class="amount"><span class="sign">$</span>5,000</div>
+          <div class="amount-label">MXN</div>
+        </div>
+        <div class="setup-card">
+          <div class="tier" data-es="Agencia · 11–29 agentes" data-en="Agency · 11–29 agents">Agencia · 11–29 agentes</div>
+          <div class="amount"><span class="sign">$</span>10,000</div>
+          <div class="amount-label">MXN</div>
+        </div>
+        <div class="setup-card">
+          <div class="tier" data-es="Agencia · 30–49 agentes" data-en="Agency · 30–49 agents">Agencia · 30–49 agentes</div>
+          <div class="amount"><span class="sign">$</span>15,000</div>
+          <div class="amount-label">MXN</div>
+        </div>
+        <div class="setup-card">
+          <div class="tier" data-es="Agencia · 50+ agentes" data-en="Agency · 50+ agents">Agencia · 50+ agentes</div>
+          <div class="amount"><span class="sign">$</span>20,000</div>
+          <div class="amount-label">MXN</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="whatsapp-block">
+      <div class="setup-head">
+        <span data-es="Complemento opcional" data-en="Optional add-on">Complemento opcional</span>
+      </div>
+      <ul class="whatsapp-list">
+        <li>
+          <p class="who" data-es="Automatización de WhatsApp" data-en="WhatsApp automation">Automatización de WhatsApp</p>
+          <span class="amt">$34.99 USD<span data-es="/mes" data-en="/month">/mes</span></span>
+        </li>
+      </ul>
+      <p style="text-align:center; margin-top:16px; font-size:13px; color:#a9c2bc; max-width:420px; margin-left:auto; margin-right:auto; line-height:1.6;" data-es="+ aproximadamente $0.60–$0.80 MXN por mensaje cuando el CRM inicia la conversación (ej. reactivar un lead frío). Responder a un lead dentro de 24 horas es gratis." data-en="+ approximately $0.60–$0.80 MXN per message when the CRM starts the conversation (e.g. reactivating a cold lead). Replying to a lead within 24 hours is free.">+ aproximadamente $0.60–$0.80 MXN por mensaje cuando el CRM inicia la conversación (ej. reactivar un lead frío). Responder a un lead dentro de 24 horas es gratis.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CREDIBILITY ================= -->
+<section class="wrap reveal cred-section">
+  <div class="cred">
+    <div>
+      <span class="eyebrow" data-es="Quién está detrás" data-en="Who built this">Quién está detrás</span>
+      <h2 data-es="10+ años vendiendo bienes raíces, ahora lo automatizamos." data-en="10+ years selling real estate, now automating it.">10+ años vendiendo bienes raíces, ahora lo automatizamos.</h2>
+      <p data-es="Creado por un agente en activo — con más de 10 años en el sector — cansado de perder leads por respuestas lentas. Quick Close CRM es el sistema que construí para mi propio negocio, ahora disponible para el tuyo." data-en="Built by a working agent — with over 10 years in the industry — tired of losing leads to slow replies. Quick Close CRM is the system I built for my own business, now available for yours.">Creado por un agente en activo — con más de 10 años en el sector — cansado de perder leads por respuestas lentas. Quick Close CRM es el sistema que construí para mi propio negocio, ahora disponible para el tuyo.</p>
+    </div>
+    <div class="badges">
+      <div class="badge"><div class="num mono">10+</div><div class="lab" data-es="Años como agente inmobiliario" data-en="Years as a real estate agent">Años como agente inmobiliario</div></div>
+      <div class="badge"><div class="num mono">AMPI</div><div class="lab" data-es="Miembro activo" data-en="Active member">Miembro activo</div></div>
+      <div class="badge"><div class="num mono">NAR</div><div class="lab" data-es="Miembro Realtor" data-en="Realtor member">Miembro Realtor</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="wrap final reveal">
+  <h2 data-es="Deja de perder leads por respuestas lentas." data-en="Stop losing leads to slow replies.">Deja de perder leads por respuestas lentas.</h2>
+  <p data-es="Escríbeme y te muestro exactamente cómo funciona para tu negocio." data-en="Send me a message and I'll walk you through exactly how it works for your business.">Escríbeme y te muestro exactamente cómo funciona para tu negocio.</p>
+  <div class="cta-row">
+    <a class="btn-wa" href="https://wa.me/529842136512?text=Me%20gustar%C3%ADa%20tener%20mas%20informaci%C3%B3n%20sobre%20Quick%20Close%20CRM." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2Zm5.8 14.07c-.24.68-1.4 1.31-1.93 1.35-.5.05-1 .24-3.36-.7-2.83-1.13-4.66-3.99-4.8-4.17-.14-.19-1.15-1.53-1.15-2.92 0-1.39.73-2.07.99-2.35.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.81 2 .88 2.15.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.37-.44.5-.14.14-.29.3-.13.58.17.28.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.29 1.42.28.14.44.12.6-.07.17-.19.72-.84.91-1.13.19-.28.38-.24.63-.14.26.09 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.17 1.35Z"/></svg>
+      <span data-es="Escríbeme por WhatsApp" data-en="Chat with me on WhatsApp">Escríbeme por WhatsApp</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-wrap">
+    <div class="brand">
+      <svg width="24" height="24" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="16" r="11" fill="#0b3d3a" stroke="#c9a227" stroke-width="1.6"/>
+        <rect x="13" y="3.5" width="4" height="3.5" rx="1.2" fill="#c9a227"/>
+        <path d="M9.5 15.3 L15 11 L20.5 15.3 Z" fill="#c9a227"/>
+        <rect x="10.6" y="15.3" width="8.8" height="6.2" fill="#c9a227"/>
+      </svg>
+      <span style="font-size:17px;">Quick Close CRM</span>
+    </div>
+    <div class="contact">
+      <a href="tel:+529842136512">+52 (984) 213-6512</a> · <a href="mailto:craig.verbeck@expmexico.mx">craig.verbeck@expmexico.mx</a>
+    </div>
+  </div>
+  <p class="foot-note" data-es="Quick Close CRM es un servicio independiente construido sobre GoHighLevel." data-en="Quick Close CRM is an independent service built on GoHighLevel.">Quick Close CRM es un servicio independiente construido sobre GoHighLevel.</p>
+</footer>
+
+<script>
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-es][data-en]').forEach(el=>{
+      el.textContent = el.getAttribute('data-' + lang);
+    });
+    document.querySelectorAll('.lang-toggle button').forEach(b=>{
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    window.__lang = lang;
+    restartDemo();
+  }
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el=>io.observe(el));
+
+  // phone chat demo
+  const chatArea = document.getElementById('chatArea');
+  const timerValue = document.getElementById('timerValue');
+  let demoTimeouts = [];
+
+  const copy = {
+    es: { incoming: "Hola, vi la villa en Puerto Morelos 🌴", reply: "¡Hola! Con gusto te ayudo — aquí tienes la info y disponibilidad 🏡", stamp: "Respondido en 4.2s" },
+    en: { incoming: "Hi, I saw the villa in Puerto Morelos 🌴", reply: "Hi! I'd love to help — here's the info and availability 🏡", stamp: "Answered in 4.2s" }
+  };
+
+  function clearDemo(){ demoTimeouts.forEach(t=>clearTimeout(t)); demoTimeouts = []; chatArea.innerHTML = ''; timerValue.textContent = '0.0s'; }
+
+  function runDemo(){
+    const lang = window.__lang || 'es';
+    const c = copy[lang];
+    clearDemo();
+
+    demoTimeouts.push(setTimeout(()=>{
+      const b = document.createElement('div');
+      b.className = 'bubble in';
+      b.textContent = c.incoming;
+      chatArea.appendChild(b);
+    }, 300));
+
+    demoTimeouts.push(setTimeout(()=>{
+      const t = document.createElement('div');
+      t.className = 'typing';
+      t.innerHTML = '<i></i><i></i><i></i>';
+      t.id = 'typingIndicator';
+      chatArea.appendChild(t);
+    }, 1300));
+
+    let start = null, raf;
+    demoTimeouts.push(setTimeout(()=>{
+      start = performance.now();
+      function tick(now){
+        const secs = ((now - start)/1000).toFixed(1);
+        timerValue.textContent = secs + 's';
+        if(secs < 4.2){ raf = requestAnimationFrame(tick); }
+      }
+      raf = requestAnimationFrame(tick);
+    }, 1300));
+
+    demoTimeouts.push(setTimeout(()=>{
+      const ti = document.getElementById('typingIndicator');
+      if(ti) ti.remove();
+      const b = document.createElement('div');
+      b.className = 'bubble out';
+      b.textContent = c.reply;
+      chatArea.appendChild(b);
+      timerValue.textContent = c.stamp;
+    }, 3500));
+
+    demoTimeouts.push(setTimeout(runDemo, 8000));
+  }
+
+  function restartDemo(){ runDemo(); }
+
+  window.__lang = 'es';
+  runDemo();
+</script>
+
+</body>
+</html>
