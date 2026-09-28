@@ -202,10 +202,14 @@
   .comp-card{
     background:var(--card); border:1px solid var(--line); border-radius:10px;
     padding:26px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:16px;
+    text-decoration:none; transition:transform .12s ease, border-color .12s ease;
   }
+  .comp-card:hover{border-color:var(--accent); transform:translateY(-2px);}
   .comp-card .url{
     font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--accent); font-weight:600;
+    display:inline-flex; align-items:center; gap:6px;
   }
+  .comp-card .url::after{content:"↗"; font-size:0.78rem;}
   .comp-card h3{font-size:1.28rem; margin-top:4px;}
   .comp-card p.desc{color:var(--ink-soft); font-size:0.94rem; margin:0;}
   .comp-stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:14px; border-top:1px solid var(--line);}
@@ -336,7 +340,7 @@
         <p data-i18n="comps.sub">Tres sitios ya en operación con este mismo sistema.</p>
       </div>
       <div class="comp-grid">
-        <div class="comp-card">
+        <a class="comp-card" href="https://exprealtymx.com" target="_blank" rel="noopener">
           <div>
             <span class="url">exprealtymx.com</span>
             <h3 data-i18n="comps.c1title">Mi propio sitio de corretaje</h3>
@@ -347,10 +351,10 @@
             <span class="chip" data-i18n="comps.c1s2">Inicio · Propiedades · Contacto</span>
             <span class="chip">Cloudflare Pages</span>
           </div>
-        </div>
-        <div class="comp-card">
+        </a>
+        <a class="comp-card" href="https://copalrealestate.mx" target="_blank" rel="noopener">
           <div>
-            <span class="url">copalrealty.netlify.app</span>
+            <span class="url">copalrealestate.mx</span>
             <h3 data-i18n="comps.c2title">Copal Real Estate</h3>
             <p class="desc" data-i18n="comps.c2desc">Agencia de Jérémie Séverin en Playa del Carmen. Estructura de cinco páginas, ilustraciones personalizadas en las secciones de servicio.</p>
           </div>
@@ -358,8 +362,8 @@
             <span class="chip">EN / ES / FR</span>
             <span class="chip" data-i18n="comps.c2s2">Inicio · Servicios · Destinos · Contacto</span>
           </div>
-        </div>
-        <div class="comp-card">
+        </a>
+        <a class="comp-card" href="https://athomerivieramaya.com" target="_blank" rel="noopener">
           <div>
             <span class="url">athomerivieramaya.com</span>
             <h3 data-i18n="comps.c3title">At Home Riviera Maya</h3>
@@ -370,7 +374,7 @@
             <span class="chip" data-i18n="comps.c3s2">Guías de huéspedes</span>
             <span class="chip">Netlify</span>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
