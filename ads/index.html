@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Meta Ads y Google Ads — Real Tech 4 Realtors</title>
+<meta name="description" content="Gestión de campañas en Meta (Facebook e Instagram) y Google Ads para agentes e inmobiliarias en México. Planes desde $2,500 MXN al mes.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#ECEAE2;
+    --bg-alt:#E1DED2;
+    --card:#F5F3EC;
+    --ink:#211D19;
+    --ink-soft:#5B5449;
+    --line:#D3CDBD;
+    --accent:#0E6B64;
+    --accent-ink:#FBFAF6;
+    --brass:#8C6A26;
+    --logo-accent:#C0532D;
+    --shadow: 0 1px 0 rgba(33,29,25,0.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1712;
+      --bg-alt:#242019;
+      --card:#221D17;
+      --ink:#EEE9DD;
+      --ink-soft:#B7AC98;
+      --line:#3B3427;
+      --accent:#2FB4A9;
+      --accent-ink:#0B1917;
+      --brass:#D2A855;
+      --logo-accent:#E37A54;
+      --shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1712;
+    --bg-alt:#242019;
+    --card:#221D17;
+    --ink:#EEE9DD;
+    --ink-soft:#B7AC98;
+    --line:#3B3427;
+    --accent:#2FB4A9;
+    --accent-ink:#0B1917;
+    --brass:#D2A855;
+    --logo-accent:#E37A54;
+    --shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Zilla Slab', Georgia, 'Times New Roman', serif;
+    font-weight:700;
+    line-height:1.08;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    font-variant-numeric:tabular-nums;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 clamp(20px,4vw,48px);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:16px clamp(20px,4vw,48px);
+  }
+  .brand{
+    display:flex; align-items:baseline; gap:10px;
+  }
+  .brand .logo-mark{
+    font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:1.28rem;
+    letter-spacing:-0.02em; line-height:1; white-space:nowrap;
+  }
+  .brand .logo-mark .four{color:var(--logo-accent);}
+  .brand .brand-full .four{color:var(--logo-accent);}
+  .brand .brand-full{
+    font-family:'Zilla Slab', serif; font-weight:700; font-size:0.98rem;
+    letter-spacing:-0.01em; white-space:nowrap;
+  }
+  nav.links{display:flex; align-items:center; gap:22px;}
+  nav.links a.section-link{
+    font-size:0.88rem; font-weight:500; color:var(--ink-soft);
+    text-decoration:none;
+  }
+  nav.links a.section-link:hover{color:var(--ink);}
+  .lang-switch{
+    display:flex; gap:2px; border:1px solid var(--line); border-radius:6px; padding:2px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; font-weight:600;
+  }
+  .lang-switch button{
+    border:none; background:transparent; color:var(--ink-soft);
+    padding:5px 9px; border-radius:4px; cursor:pointer; letter-spacing:0.03em;
+  }
+  .lang-switch button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Public Sans', sans-serif; font-weight:600; font-size:0.88rem;
+    padding:10px 18px; border-radius:7px; text-decoration:none;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .12s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-ghost{border-color:var(--line); color:var(--ink);}
+  .nav-cta{display:flex; align-items:center; gap:12px;}
+
+  @media (max-width:760px){
+    nav.links{display:none;}
+  }
+  @media (max-width:600px){
+    .nav-row{flex-wrap:wrap; row-gap:12px;}
+    .nav-cta{width:100%; justify-content:space-between;}
+  }
+  @media (max-width:400px){
+    .brand .brand-full{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:clamp(56px,9vw,96px) 0 clamp(40px,6vw,64px);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.6rem);
+    margin-top:14px;
+  }
+  .hero p.lede{
+    font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin-top:18px;
+  }
+  .hero-actions{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;}
+  .hero-stats{
+    display:flex; flex-direction:column; gap:14px;
+    border-left:1px solid var(--line); padding-left:24px;
+  }
+  .hero-stats .stat{display:flex; flex-direction:column; gap:2px;}
+  .hero-stats .stat .v{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:1rem; color:var(--ink);}
+  .hero-stats .stat .k{font-size:0.78rem; color:var(--ink-soft);}
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-stats{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:18px; flex-direction:row; flex-wrap:wrap; gap:24px;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:clamp(48px,7vw,80px) 0; border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:34px; max-width:60ch;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem); margin-top:8px;}
+  .section-head p{color:var(--ink-soft); margin-top:10px; font-size:0.98rem;}
+
+  /* ---------- specs (ficha tecnica) ---------- */
+  .spec-list{border-top:1px solid var(--line);}
+  .spec-row{
+    display:grid; grid-template-columns: 220px 1fr; gap:24px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .spec-row .k{
+    font-family:'IBM Plex Mono',monospace; font-size:0.82rem; font-weight:600;
+    color:var(--brass); letter-spacing:0.02em; padding-top:2px;
+  }
+  .spec-row .v{font-size:0.98rem;}
+  @media (max-width:640px){
+    .spec-row{grid-template-columns:1fr; gap:4px;}
+  }
+
+  /* ---------- comps ---------- */
+  .comp-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .comp-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .comp-grid{grid-template-columns:1fr;} }
+  .comp-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:26px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:16px;
+    text-decoration:none; transition:transform .12s ease, border-color .12s ease;
+  }
+  .comp-card:hover{border-color:var(--accent); transform:translateY(-2px);}
+  .comp-card .url{
+    font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--accent); font-weight:600;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .comp-card .url::after{content:"↗"; font-size:0.78rem;}
+  .comp-card h3{font-size:1.28rem; margin-top:4px;}
+  .comp-card p.desc{color:var(--ink-soft); font-size:0.94rem; margin:0;}
+  .comp-stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:14px; border-top:1px solid var(--line);}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600;
+    background:var(--bg-alt); border:1px solid var(--line); color:var(--ink-soft);
+    padding:5px 9px; border-radius:5px;
+  }
+
+  /* ---------- rates ---------- */
+  .rate-group{margin-bottom:38px;}
+  .rate-group > .label{
+    font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px; display:block;
+  }
+  .rate-cards{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){ .rate-cards{grid-template-columns:1fr;} }
+  .rate-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:24px; box-shadow:var(--shadow);
+  }
+  .rate-card.featured{border-color:var(--accent); position:relative;}
+  .rate-card .tier{font-size:0.92rem; font-weight:600; color:var(--ink-soft);}
+  .rate-card .price{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:2rem;
+    color:var(--ink); margin-top:6px; display:block;
+  }
+  .rate-card .price .unit{font-size:0.9rem; color:var(--ink-soft); font-weight:500;}
+  .rate-card ul{margin:16px 0 0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .rate-card li{font-size:0.9rem; color:var(--ink-soft); padding-left:16px; position:relative;}
+  .rate-card li::before{content:"—"; position:absolute; left:0; color:var(--brass);}
+  .rate-note{font-size:0.85rem; color:var(--ink-soft); margin-top:14px;}
+
+  /* ---------- about ---------- */
+  .about-body h3{font-size:1.3rem;}
+  .about-body p{color:var(--ink-soft); margin-top:10px; max-width:64ch;}
+  .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+
+  /* ---------- footer / cta ---------- */
+  footer{padding:clamp(48px,7vw,80px) 0 40px;}
+  .cta-block{
+    background:var(--ink); color:var(--bg);
+    border-radius:14px; padding:clamp(32px,5vw,56px);
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px; align-items:center;
+  }
+  .cta-block h2{color:var(--bg); font-size:clamp(1.7rem,3.4vw,2.3rem);}
+  .cta-block .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .cta-block .btn-ghost{border-color:color-mix(in srgb, var(--bg) 30%, transparent); color:var(--bg);}
+  .cta-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .contact-line{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:color-mix(in srgb, var(--bg) 65%, transparent); margin-top:6px;}
+  .fine-print{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    margin-top:28px; font-size:0.78rem; color:var(--ink-soft);
+  }
+  /* ---------- ads page ---------- */
+  .tier-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:760px){ .tier-grid{grid-template-columns:1fr;} }
+  .tier-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:24px; box-shadow:var(--shadow); display:flex; flex-direction:column;}
+  .tier-card .tier{font-family:'Zilla Slab', serif; font-size:1.35rem; font-weight:700;}
+  .tier-card .spend{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--brass); font-weight:600; margin-top:4px;}
+  .tier-card .incl{font-size:0.9rem; color:var(--ink-soft); margin-top:8px;}
+  .price-rows{margin-top:16px; border-top:1px solid var(--line);}
+  .price-row{display:flex; justify-content:space-between; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--line); font-size:0.92rem;}
+  .price-row .amt{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:1.05rem;}
+  .price-row .amt .unit{font-size:0.75rem; color:var(--ink-soft); font-weight:500;}
+  .price-row.bundle{border-bottom:none; color:var(--accent); font-weight:600;}
+  .price-row.bundle .amt{font-size:1.3rem; color:var(--accent);}
+  .custom-row{margin-top:20px; background:var(--card); border:1px dashed var(--line); border-radius:10px; padding:18px 24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; align-items:center;}
+  .custom-row b{font-family:'Zilla Slab', serif; font-size:1.2rem;}
+  .custom-row .mono{font-size:1.05rem; font-weight:600;}
+  .callout{margin-top:22px; border-left:3px solid var(--accent); background:var(--card); padding:16px 20px; border-radius:0 8px 8px 0; font-size:0.95rem;}
+  .callout b{color:var(--ink);}
+  .rate-cards.three{grid-template-columns:repeat(3,1fr);}
+  @media (max-width:760px){ .rate-cards.three{grid-template-columns:1fr;} }
+  .steps{list-style:none; padding:0; margin:22px 0 0; counter-reset:s; display:flex; flex-direction:column; gap:12px;}
+  .steps li{counter-increment:s; position:relative; padding-left:40px; font-size:0.96rem; min-height:26px; padding-top:2px;}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:0; width:26px; height:26px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:0.8rem; display:flex; align-items:center; justify-content:center;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-row">
+    <a class="brand" href="https://realtech4realtors.com" style="text-decoration:none">
+      <span class="logo-mark"><span>R</span><span class="four">4</span><span>R</span></span>
+      <span class="brand-full">Real Tech <span class="four">4</span> Realtors</span>
+    </a>
+    <nav class="links">
+      <a class="section-link" href="#includes" data-i18n="nav.includes">Qué incluye</a>
+      <a class="section-link" href="#rates" data-i18n="nav.rates">Tarifas</a>
+      <a class="section-link" href="#terms" data-i18n="nav.terms">Términos</a>
+    </nav>
+    <div class="nav-cta">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="fr">FR</button>
+      </div>
+      <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="nav.cta">Agendar llamada</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" data-i18n="hero.eyebrow">Meta Ads y Google Ads para inmobiliarias</span>
+        <h1 data-i18n="hero.title">Prospectos de compradores, cada semana.</h1>
+        <p class="lede" data-i18n="hero.lede">Creamos, lanzamos y optimizamos tus campañas en Facebook, Instagram y Google. Tú te enfocas en atender y cerrar; nosotros hacemos que tus anuncios trabajen.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="hero.cta1">Agendar llamada</a>
+          <a class="btn btn-ghost" href="https://wa.me/529842136512?text=Hola%20Craig%2C%20me%20interesa%20la%20gesti%C3%B3n%20de%20anuncios" target="_blank" rel="noopener" data-i18n="hero.cta2">WhatsApp con Craig</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="v mono" data-i18n="hero.stat1v">Desde $2,500 MXN/mes</span><span class="k" data-i18n="hero.stat1k">Gestión de Meta Ads</span></div>
+        <div class="stat"><span class="v mono">Meta · Google</span><span class="k" data-i18n="hero.stat2k">Por separado o en paquete</span></div>
+        <div class="stat"><span class="v mono" data-i18n="hero.stat3v">Tu cuenta, tus datos</span><span class="k" data-i18n="hero.stat3k">Pagas la publicidad directo a Meta y Google</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="includes">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="inc.eyebrow">Qué incluye</span>
+        <h2 data-i18n="inc.title">Todo lo que tus campañas necesitan</h2>
+        <p data-i18n="inc.sub">De la configuración al reporte mensual, sin que tengas que aprender a usar el administrador de anuncios.</p>
+      </div>
+      <div class="spec-list">
+        <div class="spec-row"><div class="k" data-i18n="inc.r1k">CONFIGURACIÓN</div><div class="v" data-i18n="inc.r1v">Estructura de campañas, píxel de Meta y API de conversiones, etiquetas de Google y medición de conversiones</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r2k">ESTRATEGIA Y PÚBLICOS</div><div class="v" data-i18n="inc.r2v">Definimos a quién le hablamos (compradores locales, nacionales o extranjeros) y en qué zonas</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r3k">CREACIÓN DE ANUNCIOS</div><div class="v" data-i18n="inc.r3v">Tú compartes fotos y videos de tus propiedades; nosotros diseñamos los anuncios y redactamos los textos. Si no tienes material, lo creamos</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r4k">CAPTACIÓN DE PROSPECTOS</div><div class="v" data-i18n="inc.r4v">Formularios de contacto y enlaces directos a WhatsApp, para que cada prospecto llegue a ti al momento</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r5k">OPTIMIZACIÓN</div><div class="v" data-i18n="inc.r5v">Revisión semanal de resultados: ajustamos presupuesto, públicos y anuncios. En Google depuramos palabras clave y búsquedas</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r6k">REPORTE MENSUAL</div><div class="v" data-i18n="inc.r6v">Inversión, prospectos recibidos, costo por prospecto y recomendaciones para el siguiente mes</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rates">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="rates.eyebrow">Tarifas</span>
+        <h2 data-i18n="rates.title">Precio según tu inversión en publicidad</h2>
+        <p data-i18n="rates.sub">Tu plan depende de cuánto inviertes al mes en anuncios. El paquete Meta + Google tiene precio preferencial.</p>
+      </div>
+
+      <div class="rate-group">
+        <span class="label" data-i18n="rates.monthlyLabel">GESTIÓN MENSUAL</span>
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier" data-i18n="rates.t1">Básico</span>
+            <span class="spend" data-i18n="rates.t1s">Inversión: $3,000 – $7,000 MXN/mes</span>
+            <span class="incl" data-i18n="rates.t1i">1 campaña · 2 anuncios nuevos al mes</span>
+            <div class="price-rows">
+              <div class="price-row"><span>Meta Ads</span><span class="amt">$2,500 <span class="unit">MXN</span></span></div>
+              <div class="price-row"><span>Google Ads</span><span class="amt">$3,000 <span class="unit">MXN</span></span></div>
+              <div class="price-row bundle"><span>Meta + Google</span><span class="amt">$4,500 <span class="unit">MXN</span></span></div>
+            </div>
+          </div>
+          <div class="tier-card">
+            <span class="tier" data-i18n="rates.t2">Inicial</span>
+            <span class="spend" data-i18n="rates.t2s">Inversión: $7,001 – $15,000 MXN/mes</span>
+            <span class="incl" data-i18n="rates.t2i">Hasta 2 campañas · 4 anuncios nuevos al mes</span>
+            <div class="price-rows">
+              <div class="price-row"><span>Meta Ads</span><span class="amt">$3,500 <span class="unit">MXN</span></span></div>
+              <div class="price-row"><span>Google Ads</span><span class="amt">$4,000 <span class="unit">MXN</span></span></div>
+              <div class="price-row bundle"><span>Meta + Google</span><span class="amt">$6,500 <span class="unit">MXN</span></span></div>
+            </div>
+          </div>
+          <div class="tier-card">
+            <span class="tier" data-i18n="rates.t3">Crecimiento</span>
+            <span class="spend" data-i18n="rates.t3s">Inversión: $15,001 – $30,000 MXN/mes</span>
+            <span class="incl" data-i18n="rates.t3i">Hasta 4 campañas · 8 anuncios nuevos al mes</span>
+            <div class="price-rows">
+              <div class="price-row"><span>Meta Ads</span><span class="amt">$5,500 <span class="unit">MXN</span></span></div>
+              <div class="price-row"><span>Google Ads</span><span class="amt">$6,500 <span class="unit">MXN</span></span></div>
+              <div class="price-row bundle"><span>Meta + Google</span><span class="amt">$10,000 <span class="unit">MXN</span></span></div>
+            </div>
+          </div>
+          <div class="tier-card">
+            <span class="tier" data-i18n="rates.t4">Pro</span>
+            <span class="spend" data-i18n="rates.t4s">Inversión: $30,001 – $60,000 MXN/mes</span>
+            <span class="incl" data-i18n="rates.t4i">Hasta 6 campañas · 12 anuncios nuevos al mes</span>
+            <div class="price-rows">
+              <div class="price-row"><span>Meta Ads</span><span class="amt">$8,500 <span class="unit">MXN</span></span></div>
+              <div class="price-row"><span>Google Ads</span><span class="amt">$9,500 <span class="unit">MXN</span></span></div>
+              <div class="price-row bundle"><span>Meta + Google</span><span class="amt">$15,000 <span class="unit">MXN</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="custom-row">
+          <div><b data-i18n="rates.t5">Personalizado</b><div class="incl" style="color:var(--ink-soft);font-size:0.9rem" data-i18n="rates.t5s">Inversión de más de $60,000 MXN/mes · a la medida</div></div>
+          <span class="mono" data-i18n="rates.t5p">12% de tu inversión mensual</span>
+        </div>
+        <p class="rate-note" data-i18n="rates.note">Precios mensuales en pesos mexicanos. Si requieres factura, se agrega el IVA.</p>
+        <div class="callout"><b data-i18n="rates.spendTitle">La inversión en anuncios no está incluida.</b> <span data-i18n="rates.spendBody">La pagas directamente a Meta y a Google con tu propia tarjeta, desde una cuenta publicitaria a tu nombre. Inversión mínima recomendada: $3,000 MXN al mes por plataforma.</span></div>
+      </div>
+
+      <div class="rate-group">
+        <span class="label" data-i18n="rates.setupLabel">CONFIGURACIÓN — PAGO ÚNICO</span>
+        <div class="rate-cards three">
+          <div class="rate-card"><span class="tier">Meta Ads</span><span class="price mono">$2,000 <span class="unit">MXN</span></span></div>
+          <div class="rate-card"><span class="tier">Google Ads</span><span class="price mono">$3,000 <span class="unit">MXN</span></span></div>
+          <div class="rate-card featured"><span class="tier" data-i18n="rates.setupBoth">Meta + Google (juntos)</span><span class="price mono">$4,000 <span class="unit">MXN</span></span></div>
+        </div>
+        <ol class="steps">
+          <li data-i18n="rates.pay1">La configuración se paga por adelantado, al confirmar el servicio.</li>
+          <li data-i18n="rates.pay2">La primera mensualidad se paga cuando tus anuncios ya están activos y corriendo.</li>
+          <li data-i18n="rates.pay3">A partir de ahí, la mensualidad se paga cada mes en la misma fecha.</li>
+        </ol>
+        <div class="callout"><b data-i18n="rates.crmTitle">Beneficio para clientes de Quick Close CRM:</b> <span data-i18n="rates.crmBody">si tienes Quick Close CRM activo, no pagas configuración y recibes $500 MXN de descuento mensual por plataforma ($1,000 MXN en el paquete Meta + Google). Además, tus prospectos entran directo a tu CRM.</span> <a href="https://realtech4realtors.com/crm" data-i18n="rates.crmLink">Conoce Quick Close CRM →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="terms">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="terms.eyebrow">Términos</span>
+        <h2 data-i18n="terms.title">Reglas claras desde el inicio</h2>
+      </div>
+      <div class="spec-list">
+        <div class="spec-row"><div class="k" data-i18n="terms.r1k">PLAZO MÍNIMO</div><div class="v" data-i18n="terms.r1v">3 meses. Las primeras semanas Meta y Google aprenden quién responde a tus anuncios. Después, el servicio es mes a mes y puedes cancelar con 30 días de aviso.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r2k">TU CUENTA ES TUYA</div><div class="v" data-i18n="terms.r2v">Las cuentas publicitarias están a tu nombre y nos das acceso como administradores. Si terminas el servicio, conservas la cuenta, los públicos y todo el historial.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r3k">CAMBIO DE PLAN</div><div class="v" data-i18n="terms.r3v">Si tu inversión mensual sube o baja de nivel, el plan se ajusta a partir del mes siguiente.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r4k">MATERIAL</div><div class="v" data-i18n="terms.r4v">Tú compartes fotos y videos; nosotros diseñamos los anuncios. Si no tienes material, creamos imágenes con lo disponible. Grabación o edición de video, tomas con dron y sesiones de fotos se cotizan aparte.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r5k">APROBACIÓN</div><div class="v" data-i18n="terms.r5v">Antes de publicar te mostramos los anuncios para tu aprobación, con una ronda de cambios por cada grupo de anuncios.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r6k">RESULTADOS</div><div class="v" data-i18n="terms.r6v">Manejamos y optimizamos tus campañas para lograr el mejor costo por prospecto posible. Las ventas dependen también del presupuesto, la propiedad, el precio y la rapidez de tu seguimiento, por lo que no garantizamos un número específico de prospectos o ventas.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r7k">REGLAS DE META</div><div class="v" data-i18n="terms.r7v">Meta puede limitar la segmentación por edad, código postal o intereses en anuncios inmobiliarios, sobre todo los dirigidos a Estados Unidos o Canadá. Trabajamos dentro de esas reglas.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r8k">PAGOS</div><div class="v" data-i18n="terms.r8v">Si una mensualidad no se paga en la fecha acordada, las campañas se pausan hasta regularizar el pago.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r9k">NO INCLUYE</div><div class="v" data-i18n="terms.r9v">Páginas de aterrizaje o sitio web, CRM ni automatizaciones de WhatsApp. Te los podemos ofrecer como servicios adicionales.</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cta-block">
+      <div>
+        <h2 data-i18n="footer.title">Hablemos de tus campañas.</h2>
+        <p class="contact-line">craig.verbeck@expmexico.mx · +52 984 213 6512</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="footer.cta1">Agendar llamada</a>
+        <a class="btn btn-ghost" href="https://wa.me/529842136512?text=Hola%20Craig%2C%20me%20interesa%20la%20gesti%C3%B3n%20de%20anuncios" target="_blank" rel="noopener" data-i18n="footer.cta2">WhatsApp</a>
+      </div>
+    </div>
+    <div class="fine-print">
+      <span data-i18n="footer.fine">Real Tech 4 Realtors — un servicio de Craig Verbeck</span>
+      <a class="mono" href="https://realtech4realtors.com" style="text-decoration:none">realtech4realtors.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var I18N = {
+    en: {
+      "nav.includes":"What's included","nav.rates":"Rates","nav.terms":"Terms","nav.cta":"Book a call",
+      "hero.eyebrow":"Meta Ads and Google Ads for real estate",
+      "hero.title":"Buyer leads, every week.",
+      "hero.lede":"We build, launch and optimize your campaigns on Facebook, Instagram and Google. You focus on answering and closing; we make your ads work.",
+      "hero.cta1":"Book a call","hero.cta2":"WhatsApp Craig",
+      "hero.stat1v":"From $2,500 MXN/mo","hero.stat1k":"Meta Ads management",
+      "hero.stat2k":"Separately or as a bundle",
+      "hero.stat3v":"Your account, your data","hero.stat3k":"You pay ad spend directly to Meta and Google",
+      "inc.eyebrow":"What's included","inc.title":"Everything your campaigns need","inc.sub":"From setup to the monthly report, without you having to learn Ads Manager.",
+      "inc.r1k":"SETUP","inc.r1v":"Campaign structure, Meta Pixel and Conversions API, Google tags and conversion tracking",
+      "inc.r2k":"STRATEGY & AUDIENCES","inc.r2v":"We define who we're talking to (local, national or international buyers) and in which areas",
+      "inc.r3k":"AD CREATION","inc.r3v":"You share photos and videos of your listings; we design the ads and write the copy. No material? We create it",
+      "inc.r4k":"LEAD CAPTURE","inc.r4v":"Lead forms and direct WhatsApp links, so every lead reaches you instantly",
+      "inc.r5k":"OPTIMIZATION","inc.r5v":"Weekly review: we adjust budget, audiences and ads. On Google we refine keywords and search terms",
+      "inc.r6k":"MONTHLY REPORT","inc.r6v":"Spend, leads received, cost per lead and recommendations for next month",
+      "rates.eyebrow":"Rates","rates.title":"Priced by your ad spend","rates.sub":"Your plan depends on how much you invest in ads each month. The Meta + Google bundle gets a better price.",
+      "rates.monthlyLabel":"MONTHLY MANAGEMENT",
+      "rates.t1":"Basic","rates.t1s":"Ad spend: $3,000 – $7,000 MXN/mo","rates.t1i":"1 campaign · 2 new ads per month",
+      "rates.t2":"Starter","rates.t2s":"Ad spend: $7,001 – $15,000 MXN/mo","rates.t2i":"Up to 2 campaigns · 4 new ads per month",
+      "rates.t3":"Growth","rates.t3s":"Ad spend: $15,001 – $30,000 MXN/mo","rates.t3i":"Up to 4 campaigns · 8 new ads per month",
+      "rates.t4":"Pro","rates.t4s":"Ad spend: $30,001 – $60,000 MXN/mo","rates.t4i":"Up to 6 campaigns · 12 new ads per month",
+      "rates.t5":"Custom","rates.t5s":"Ad spend over $60,000 MXN/mo · tailored","rates.t5p":"12% of your monthly ad spend",
+      "rates.note":"Monthly prices in Mexican pesos. IVA is added if you need a factura.",
+      "rates.spendTitle":"Ad spend is not included.","rates.spendBody":"You pay Meta and Google directly with your own card, from an ad account in your name. Recommended minimum: $3,000 MXN per month per platform.",
+      "rates.setupLabel":"SETUP — ONE-TIME","rates.setupBoth":"Meta + Google (together)",
+      "rates.pay1":"Setup is paid up front, when you confirm the service.","rates.pay2":"The first monthly fee is paid once your ads are live and running.","rates.pay3":"After that, the monthly fee is paid on the same date each month.",
+      "rates.crmTitle":"Quick Close CRM client perk:","rates.crmBody":"with an active Quick Close CRM account, setup is free and you get $500 MXN off per platform each month ($1,000 MXN off the Meta + Google bundle). Your leads also go straight into your CRM.","rates.crmLink":"See Quick Close CRM →",
+      "terms.eyebrow":"Terms","terms.title":"Clear rules from day one",
+      "terms.r1k":"MINIMUM TERM","terms.r1v":"3 months. In the first weeks Meta and Google learn who responds to your ads. After that it's month to month, cancel with 30 days' notice.",
+      "terms.r2k":"YOUR ACCOUNT","terms.r2v":"Ad accounts are in your name and you give us admin access. If you leave, you keep the account, audiences and full history.",
+      "terms.r3k":"PLAN CHANGES","terms.r3v":"If your monthly ad spend moves up or down a tier, your plan adjusts from the following month.",
+      "terms.r4k":"MATERIAL","terms.r4v":"You share photos and videos; we design the ads. No material? We create images from what's available. Video shooting or editing, drone footage and photo shoots are quoted separately.",
+      "terms.r5k":"APPROVAL","terms.r5v":"Before anything goes live you approve the ads, with one round of changes per batch.",
+      "terms.r6k":"RESULTS","terms.r6v":"We manage and optimize your campaigns for the best possible cost per lead. Sales also depend on budget, the property, price and how fast you follow up, so we don't guarantee a specific number of leads or sales.",
+      "terms.r7k":"META RULES","terms.r7v":"Meta may limit targeting by age, zip code or interests on real estate ads, especially those aimed at the US or Canada. We work within those rules.",
+      "terms.r8k":"PAYMENTS","terms.r8v":"If a monthly fee isn't paid on the agreed date, campaigns are paused until payment is up to date.",
+      "terms.r9k":"NOT INCLUDED","terms.r9v":"Landing pages or websites, CRM, and WhatsApp automations. We can offer them as add-on services.",
+      "footer.title":"Let's talk about your campaigns.","footer.cta1":"Book a call","footer.cta2":"WhatsApp",
+      "footer.fine":"Real Tech 4 Realtors — a service of Craig Verbeck"
+    },
+    fr: {
+      "nav.includes":"Ce qui est inclus","nav.rates":"Tarifs","nav.terms":"Conditions","nav.cta":"Réserver un appel",
+      "hero.eyebrow":"Meta Ads et Google Ads pour l'immobilier",
+      "hero.title":"Des prospects acheteurs, chaque semaine.",
+      "hero.lede":"Nous créons, lançons et optimisons vos campagnes sur Facebook, Instagram et Google. Vous vous concentrez sur les clients et la vente ; nous faisons travailler vos annonces.",
+      "hero.cta1":"Réserver un appel","hero.cta2":"WhatsApp avec Craig",
+      "hero.stat1v":"Dès 2 500 MXN/mois","hero.stat1k":"Gestion Meta Ads",
+      "hero.stat2k":"Séparément ou en forfait",
+      "hero.stat3v":"Votre compte, vos données","hero.stat3k":"Vous payez la publicité directement à Meta et Google",
+      "inc.eyebrow":"Ce qui est inclus","inc.title":"Tout ce dont vos campagnes ont besoin","inc.sub":"De la configuration au rapport mensuel, sans devoir apprendre le gestionnaire de publicités.",
+      "inc.r1k":"CONFIGURATION","inc.r1v":"Structure des campagnes, pixel Meta et API de conversions, balises Google et suivi des conversions",
+      "inc.r2k":"STRATÉGIE ET AUDIENCES","inc.r2v":"Nous définissons à qui parler (acheteurs locaux, nationaux ou étrangers) et dans quelles zones",
+      "inc.r3k":"CRÉATION D'ANNONCES","inc.r3v":"Vous partagez photos et vidéos de vos propriétés ; nous concevons les annonces et rédigeons les textes. Pas de matériel ? Nous le créons",
+      "inc.r4k":"CAPTURE DE PROSPECTS","inc.r4v":"Formulaires de contact et liens WhatsApp directs, pour que chaque prospect vous parvienne immédiatement",
+      "inc.r5k":"OPTIMISATION","inc.r5v":"Revue hebdomadaire : nous ajustons budget, audiences et annonces. Sur Google, nous affinons mots-clés et recherches",
+      "inc.r6k":"RAPPORT MENSUEL","inc.r6v":"Dépenses, prospects reçus, coût par prospect et recommandations pour le mois suivant",
+      "rates.eyebrow":"Tarifs","rates.title":"Un prix selon votre budget publicitaire","rates.sub":"Votre formule dépend de votre investissement publicitaire mensuel. Le forfait Meta + Google bénéficie d'un prix préférentiel.",
+      "rates.monthlyLabel":"GESTION MENSUELLE",
+      "rates.t1":"Essentiel","rates.t1s":"Budget : 3 000 – 7 000 MXN/mois","rates.t1i":"1 campagne · 2 nouvelles annonces par mois",
+      "rates.t2":"Départ","rates.t2s":"Budget : 7 001 – 15 000 MXN/mois","rates.t2i":"Jusqu'à 2 campagnes · 4 nouvelles annonces par mois",
+      "rates.t3":"Croissance","rates.t3s":"Budget : 15 001 – 30 000 MXN/mois","rates.t3i":"Jusqu'à 4 campagnes · 8 nouvelles annonces par mois",
+      "rates.t4":"Pro","rates.t4s":"Budget : 30 001 – 60 000 MXN/mois","rates.t4i":"Jusqu'à 6 campagnes · 12 nouvelles annonces par mois",
+      "rates.t5":"Sur mesure","rates.t5s":"Budget de plus de 60 000 MXN/mois · sur mesure","rates.t5p":"12 % de votre budget mensuel",
+      "rates.note":"Prix mensuels en pesos mexicains. L'IVA s'ajoute si vous avez besoin d'une facture.",
+      "rates.spendTitle":"Le budget publicitaire n'est pas inclus.","rates.spendBody":"Vous le payez directement à Meta et Google avec votre propre carte, depuis un compte publicitaire à votre nom. Minimum recommandé : 3 000 MXN par mois et par plateforme.",
+      "rates.setupLabel":"CONFIGURATION — PAIEMENT UNIQUE","rates.setupBoth":"Meta + Google (ensemble)",
+      "rates.pay1":"La configuration se paie d'avance, à la confirmation du service.","rates.pay2":"La première mensualité se paie une fois vos annonces actives.","rates.pay3":"Ensuite, la mensualité se paie chaque mois à la même date.",
+      "rates.crmTitle":"Avantage clients Quick Close CRM :","rates.crmBody":"avec un compte Quick Close CRM actif, la configuration est offerte et vous recevez 500 MXN de réduction mensuelle par plateforme (1 000 MXN sur le forfait Meta + Google). Vos prospects arrivent aussi directement dans votre CRM.","rates.crmLink":"Découvrir Quick Close CRM →",
+      "terms.eyebrow":"Conditions","terms.title":"Des règles claires dès le départ",
+      "terms.r1k":"DURÉE MINIMALE","terms.r1v":"3 mois. Les premières semaines, Meta et Google apprennent qui réagit à vos annonces. Ensuite, le service est mensuel, résiliable avec 30 jours de préavis.",
+      "terms.r2k":"VOTRE COMPTE","terms.r2v":"Les comptes publicitaires sont à votre nom et vous nous donnez un accès administrateur. Si vous partez, vous conservez le compte, les audiences et tout l'historique.",
+      "terms.r3k":"CHANGEMENT DE FORMULE","terms.r3v":"Si votre budget mensuel change de palier, la formule s'ajuste dès le mois suivant.",
+      "terms.r4k":"MATÉRIEL","terms.r4v":"Vous partagez photos et vidéos ; nous concevons les annonces. Pas de matériel ? Nous créons des visuels avec ce qui est disponible. Tournage ou montage vidéo, prises par drone et séances photo sont chiffrés à part.",
+      "terms.r5k":"APPROBATION","terms.r5v":"Avant publication, vous approuvez les annonces, avec une série de modifications par lot.",
+      "terms.r6k":"RÉSULTATS","terms.r6v":"Nous gérons et optimisons vos campagnes pour obtenir le meilleur coût par prospect. Les ventes dépendent aussi du budget, du bien, du prix et de la rapidité de votre suivi ; nous ne garantissons donc pas un nombre précis de prospects ou de ventes.",
+      "terms.r7k":"RÈGLES DE META","terms.r7v":"Meta peut limiter le ciblage par âge, code postal ou centres d'intérêt pour les annonces immobilières, surtout celles visant les États-Unis ou le Canada. Nous travaillons dans ce cadre.",
+      "terms.r8k":"PAIEMENTS","terms.r8v":"Si une mensualité n'est pas payée à la date convenue, les campagnes sont mises en pause jusqu'à régularisation.",
+      "terms.r9k":"NON INCLUS","terms.r9v":"Pages de destination ou site web, CRM et automatisations WhatsApp. Nous pouvons les proposer en services complémentaires.",
+      "footer.title":"Parlons de vos campagnes.","footer.cta1":"Réserver un appel","footer.cta2":"WhatsApp",
+      "footer.fine":"Real Tech 4 Realtors — un service de Craig Verbeck"
+    },
+    es: {}
+  };
+
+  // Spanish is the page's default markup; capture it so switching back works.
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    I18N.es[el.getAttribute('data-i18n')] = el.textContent;
+  });
+
+  function applyLang(lang){
+    var dict = I18N[lang] || I18N.es;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    document.documentElement.setAttribute('lang', lang);
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+  });
+
+  applyLang('es');
+})();
+</script>
+
+</body>
+</html>
