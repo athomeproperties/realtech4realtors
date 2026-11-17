@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de contenido para redes sociales — Real Tech 4 Realtors</title>
+<meta name="description" content="Plan de 30 días de qué publicar y cuándo en Instagram, Facebook y TikTok para agentes inmobiliarios en México. Desde $900 MXN al mes.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#ECEAE2;
+    --bg-alt:#E1DED2;
+    --card:#F5F3EC;
+    --ink:#211D19;
+    --ink-soft:#5B5449;
+    --line:#D3CDBD;
+    --accent:#0E6B64;
+    --accent-ink:#FBFAF6;
+    --brass:#8C6A26;
+    --logo-accent:#C0532D;
+    --shadow: 0 1px 0 rgba(33,29,25,0.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1B1712;
+      --bg-alt:#242019;
+      --card:#221D17;
+      --ink:#EEE9DD;
+      --ink-soft:#B7AC98;
+      --line:#3B3427;
+      --accent:#2FB4A9;
+      --accent-ink:#0B1917;
+      --brass:#D2A855;
+      --logo-accent:#E37A54;
+      --shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1B1712;
+    --bg-alt:#242019;
+    --card:#221D17;
+    --ink:#EEE9DD;
+    --ink-soft:#B7AC98;
+    --line:#3B3427;
+    --accent:#2FB4A9;
+    --accent-ink:#0B1917;
+    --brass:#D2A855;
+    --logo-accent:#E37A54;
+    --shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Zilla Slab', Georgia, 'Times New Roman', serif;
+    font-weight:700;
+    line-height:1.08;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    font-variant-numeric:tabular-nums;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 clamp(20px,4vw,48px);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:16px clamp(20px,4vw,48px);
+  }
+  .brand{
+    display:flex; align-items:baseline; gap:10px;
+  }
+  .brand .logo-mark{
+    font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:1.28rem;
+    letter-spacing:-0.02em; line-height:1; white-space:nowrap;
+  }
+  .brand .logo-mark .four{color:var(--logo-accent);}
+  .brand .brand-full .four{color:var(--logo-accent);}
+  .brand .brand-full{
+    font-family:'Zilla Slab', serif; font-weight:700; font-size:0.98rem;
+    letter-spacing:-0.01em; white-space:nowrap;
+  }
+  nav.links{display:flex; align-items:center; gap:22px;}
+  nav.links a.section-link{
+    font-size:0.88rem; font-weight:500; color:var(--ink-soft);
+    text-decoration:none;
+  }
+  nav.links a.section-link:hover{color:var(--ink);}
+  .lang-switch{
+    display:flex; gap:2px; border:1px solid var(--line); border-radius:6px; padding:2px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; font-weight:600;
+  }
+  .lang-switch button{
+    border:none; background:transparent; color:var(--ink-soft);
+    padding:5px 9px; border-radius:4px; cursor:pointer; letter-spacing:0.03em;
+  }
+  .lang-switch button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Public Sans', sans-serif; font-weight:600; font-size:0.88rem;
+    padding:10px 18px; border-radius:7px; text-decoration:none;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .12s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-ghost{border-color:var(--line); color:var(--ink);}
+  .nav-cta{display:flex; align-items:center; gap:12px;}
+
+  @media (max-width:760px){
+    nav.links{display:none;}
+  }
+  @media (max-width:600px){
+    .nav-row{flex-wrap:wrap; row-gap:12px;}
+    .nav-cta{width:100%; justify-content:space-between;}
+  }
+  @media (max-width:400px){
+    .brand .brand-full{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:clamp(56px,9vw,96px) 0 clamp(40px,6vw,64px);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.6rem);
+    margin-top:14px;
+  }
+  .hero p.lede{
+    font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin-top:18px;
+  }
+  .hero-actions{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;}
+  .hero-stats{
+    display:flex; flex-direction:column; gap:14px;
+    border-left:1px solid var(--line); padding-left:24px;
+  }
+  .hero-stats .stat{display:flex; flex-direction:column; gap:2px;}
+  .hero-stats .stat .v{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:1rem; color:var(--ink);}
+  .hero-stats .stat .k{font-size:0.78rem; color:var(--ink-soft);}
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-stats{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:18px; flex-direction:row; flex-wrap:wrap; gap:24px;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:clamp(48px,7vw,80px) 0; border-bottom:1px solid var(--line);}
+  .section-head{margin-bottom:34px; max-width:60ch;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem); margin-top:8px;}
+  .section-head p{color:var(--ink-soft); margin-top:10px; font-size:0.98rem;}
+
+  /* ---------- specs (ficha tecnica) ---------- */
+  .spec-list{border-top:1px solid var(--line);}
+  .spec-row{
+    display:grid; grid-template-columns: 220px 1fr; gap:24px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .spec-row .k{
+    font-family:'IBM Plex Mono',monospace; font-size:0.82rem; font-weight:600;
+    color:var(--brass); letter-spacing:0.02em; padding-top:2px;
+  }
+  .spec-row .v{font-size:0.98rem;}
+  @media (max-width:640px){
+    .spec-row{grid-template-columns:1fr; gap:4px;}
+  }
+
+  /* ---------- comps ---------- */
+  .comp-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .comp-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .comp-grid{grid-template-columns:1fr;} }
+  .comp-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:26px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:16px;
+    text-decoration:none; transition:transform .12s ease, border-color .12s ease;
+  }
+  .comp-card:hover{border-color:var(--accent); transform:translateY(-2px);}
+  .comp-card .url{
+    font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--accent); font-weight:600;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .comp-card .url::after{content:"↗"; font-size:0.78rem;}
+  .comp-card h3{font-size:1.28rem; margin-top:4px;}
+  .comp-card p.desc{color:var(--ink-soft); font-size:0.94rem; margin:0;}
+  .comp-stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:14px; border-top:1px solid var(--line);}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:600;
+    background:var(--bg-alt); border:1px solid var(--line); color:var(--ink-soft);
+    padding:5px 9px; border-radius:5px;
+  }
+
+  /* ---------- rates ---------- */
+  .rate-group{margin-bottom:38px;}
+  .rate-group > .label{
+    font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px; display:block;
+  }
+  .rate-cards{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){ .rate-cards{grid-template-columns:1fr;} }
+  .rate-card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:24px; box-shadow:var(--shadow);
+  }
+  .rate-card.featured{border-color:var(--accent); position:relative;}
+  .rate-card .tier{font-size:0.92rem; font-weight:600; color:var(--ink-soft);}
+  .rate-card .price{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:2rem;
+    color:var(--ink); margin-top:6px; display:block;
+  }
+  .rate-card .price .unit{font-size:0.9rem; color:var(--ink-soft); font-weight:500;}
+  .rate-card ul{margin:16px 0 0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .rate-card li{font-size:0.9rem; color:var(--ink-soft); padding-left:16px; position:relative;}
+  .rate-card li::before{content:"—"; position:absolute; left:0; color:var(--brass);}
+  .rate-note{font-size:0.85rem; color:var(--ink-soft); margin-top:14px;}
+
+  /* ---------- about ---------- */
+  .about-body h3{font-size:1.3rem;}
+  .about-body p{color:var(--ink-soft); margin-top:10px; max-width:64ch;}
+  .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+
+  /* ---------- footer / cta ---------- */
+  footer{padding:clamp(48px,7vw,80px) 0 40px;}
+  .cta-block{
+    background:var(--ink); color:var(--bg);
+    border-radius:14px; padding:clamp(32px,5vw,56px);
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px; align-items:center;
+  }
+  .cta-block h2{color:var(--bg); font-size:clamp(1.7rem,3.4vw,2.3rem);}
+  .cta-block .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .cta-block .btn-ghost{border-color:color-mix(in srgb, var(--bg) 30%, transparent); color:var(--bg);}
+  .cta-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .contact-line{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:color-mix(in srgb, var(--bg) 65%, transparent); margin-top:6px;}
+  .fine-print{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    margin-top:28px; font-size:0.78rem; color:var(--ink-soft);
+  }
+  /* ---------- ads page ---------- */
+  .tier-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:760px){ .tier-grid{grid-template-columns:1fr;} }
+  .tier-card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:24px; box-shadow:var(--shadow); display:flex; flex-direction:column;}
+  .tier-card .tier{font-family:'Zilla Slab', serif; font-size:1.35rem; font-weight:700;}
+  .tier-card .spend{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--brass); font-weight:600; margin-top:4px;}
+  .tier-card .incl{font-size:0.9rem; color:var(--ink-soft); margin-top:8px;}
+  .price-rows{margin-top:16px; border-top:1px solid var(--line);}
+  .price-row{display:flex; justify-content:space-between; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--line); font-size:0.92rem;}
+  .price-row .amt{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:1.05rem;}
+  .price-row .amt .unit{font-size:0.75rem; color:var(--ink-soft); font-weight:500;}
+  .price-row.bundle{border-bottom:none; color:var(--accent); font-weight:600;}
+  .price-row.bundle .amt{font-size:1.3rem; color:var(--accent);}
+  .custom-row{margin-top:20px; background:var(--card); border:1px dashed var(--line); border-radius:10px; padding:18px 24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; align-items:center;}
+  .custom-row b{font-family:'Zilla Slab', serif; font-size:1.2rem;}
+  .custom-row .mono{font-size:1.05rem; font-weight:600;}
+  .callout{margin-top:22px; border-left:3px solid var(--accent); background:var(--card); padding:16px 20px; border-radius:0 8px 8px 0; font-size:0.95rem;}
+  .callout b{color:var(--ink);}
+  .rate-cards.three{grid-template-columns:repeat(3,1fr);}
+  @media (max-width:760px){ .rate-cards.three{grid-template-columns:1fr;} }
+  .steps{list-style:none; padding:0; margin:22px 0 0; counter-reset:s; display:flex; flex-direction:column; gap:12px;}
+  .steps li{counter-increment:s; position:relative; padding-left:40px; font-size:0.96rem; min-height:26px; padding-top:2px;}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:0; width:26px; height:26px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:0.8rem; display:flex; align-items:center; justify-content:center;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-row">
+    <a class="brand" href="https://realtech4realtors.com" style="text-decoration:none">
+      <span class="logo-mark"><span>R</span><span class="four">4</span><span>R</span></span>
+      <span class="brand-full">Real Tech <span class="four">4</span> Realtors</span>
+    </a>
+    <nav class="links">
+      <a class="section-link" href="#includes" data-i18n="nav.includes">Qué incluye</a>
+      <a class="section-link" href="#rates" data-i18n="nav.rates">Tarifas</a>
+      <a class="section-link" href="#terms" data-i18n="nav.terms">Términos</a>
+    </nav>
+    <div class="nav-cta">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="fr">FR</button>
+      </div>
+      <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="nav.cta">Agendar llamada</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" data-i18n="hero.eyebrow">Plan de contenido para redes sociales</span>
+        <h1 data-i18n="hero.title">Cada día sabrás qué publicar.</h1>
+        <p class="lede" data-i18n="hero.lede">Te entregamos un plan de 30 días con qué publicar y cuándo: la idea, qué grabar, el texto y los hashtags. Tú grabas y publicas; nosotros pensamos la estrategia.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="hero.cta1">Agendar llamada</a>
+          <a class="btn btn-ghost" href="https://wa.me/529842136512?text=Hola%20Craig%2C%20me%20interesa%20el%20plan%20de%20contenido%20para%20redes%20sociales" target="_blank" rel="noopener" data-i18n="hero.cta2">WhatsApp con Craig</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="v mono" data-i18n="hero.stat1v">Desde $900 MXN/mes</span><span class="k" data-i18n="hero.stat1k">Con suscripción mensual</span></div>
+        <div class="stat"><span class="v mono" data-i18n="hero.stat2v">30 días planeados</span><span class="k" data-i18n="hero.stat2k">Qué publicar y a qué hora</span></div>
+        <div class="stat"><span class="v mono">Instagram · Facebook · TikTok</span><span class="k" data-i18n="hero.stat3k">Una red social o las tres</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="includes">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="inc.eyebrow">Qué incluye</span>
+        <h2 data-i18n="inc.title">Tu mes completo, planeado</h2>
+        <p data-i18n="inc.sub">Un plan claro que sigues desde tu celular. Sin adivinar qué subir ni cuándo.</p>
+      </div>
+      <div class="spec-list">
+        <div class="spec-row"><div class="k" data-i18n="inc.r1k">CUESTIONARIO INICIAL</div><div class="v" data-i18n="inc.r1v">Nos cuentas tu zona, tus propiedades, a quién quieres llegar y tu estilo, para que el plan suene a ti</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r2k">CALENDARIO DE 30 DÍAS</div><div class="v" data-i18n="inc.r2v">Qué publicar cada día y el mejor horario, con una mezcla de propiedades, tips, zona y tu marca personal</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r3k">IDEAS Y GUIONES</div><div class="v" data-i18n="inc.r3v">Para cada video: el gancho de los primeros segundos, qué grabar y qué decir</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r4k">TEXTOS LISTOS</div><div class="v" data-i18n="inc.r4v">Texto de la publicación, hashtags y llamada a la acción, listos para copiar y pegar</div></div>
+        <div class="spec-row"><div class="k" data-i18n="inc.r5k">FORMATOS</div><div class="v" data-i18n="inc.r5v">Reels, historias, carruseles y publicaciones, según lo que mejor funciona en cada red social</div></div>
+      </div>
+      <div class="callout"><b data-i18n="inc.youTitle">Tú grabas y publicas.</b> <span data-i18n="inc.youBody">Nosotros te decimos qué hacer cada día; la grabación, la edición y la publicación quedan en tus manos. Así mantienes tu voz y el precio se mantiene bajo.</span></div>
+    </div>
+  </section>
+
+  <section id="rates">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="rates.eyebrow">Tarifas</span>
+        <h2 data-i18n="rates.title">Un plan o una suscripción</h2>
+        <p data-i18n="rates.sub">Compra un solo plan para probar, o suscríbete y recibe un plan nuevo cada mes a mejor precio.</p>
+      </div>
+
+      <div class="rate-group">
+        <span class="label" data-i18n="rates.plansLabel">PLANES DE CONTENIDO</span>
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier" data-i18n="rates.t1">Plan único</span>
+            <span class="spend" data-i18n="rates.t1s">Pago único · 30 días</span>
+            <span class="incl" data-i18n="rates.t1i">Ideal para probar o para un mes de lanzamiento</span>
+            <div class="price-rows">
+              <div class="price-row"><span data-i18n="rates.one">1 red social</span><span class="amt">$1,200 <span class="unit">MXN</span></span></div>
+              <div class="price-row"><span>Instagram + Facebook + TikTok</span><span class="amt">$1,800 <span class="unit">MXN</span></span></div>
+            </div>
+          </div>
+          <div class="tier-card" style="border-color:var(--accent)">
+            <span class="tier" data-i18n="rates.t2">Suscripción mensual</span>
+            <span class="spend" data-i18n="rates.t2s">Un plan nuevo cada mes · mínimo 3 meses</span>
+            <span class="incl" data-i18n="rates.t2i">Cada plan aprende de lo que funcionó el mes anterior</span>
+            <div class="price-rows">
+              <div class="price-row"><span data-i18n="rates.one2">1 red social</span><span class="amt">$900 <span class="unit" data-i18n="rates.mo">MXN/mes</span></span></div>
+              <div class="price-row bundle"><span>Instagram + Facebook + TikTok</span><span class="amt">$1,400 <span class="unit" data-i18n="rates.mo2">MXN/mes</span></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="rate-note" data-i18n="rates.note">Precios en pesos mexicanos. Si requieres factura, se agrega el IVA.</p>
+      </div>
+
+      <div class="rate-group">
+        <span class="label" data-i18n="rates.addLabel">EXTRAS OPCIONALES</span>
+        <div class="rate-cards">
+          <div class="rate-card">
+            <span class="tier" data-i18n="rates.a1">Llamada de estrategia o revisión</span>
+            <span class="price mono">$500 <span class="unit" data-i18n="rates.a1u">MXN por llamada</span></span>
+            <ul><li data-i18n="rates.a1d">45 minutos por videollamada para revisar tu plan, tus resultados o resolver dudas</li></ul>
+          </div>
+          <div class="rate-card">
+            <span class="tier" data-i18n="rates.a2">Revisión de tus videos</span>
+            <span class="price mono">$600 <span class="unit" data-i18n="rates.a2u">MXN/mes</span></span>
+            <ul><li data-i18n="rates.a2d">Nos mandas tus videos por WhatsApp antes de publicarlos y te damos comentarios para mejorarlos</li></ul>
+          </div>
+        </div>
+        <div class="callout"><b data-i18n="rates.discTitle">25% de descuento para clientes:</b> <span data-i18n="rates.discBody">si tienes Quick Close CRM activo o contratas nuestra gestión de anuncios, recibes 25% de descuento en tu plan de contenido. Los descuentos no son acumulables.</span> <a href="https://realtech4realtors.com/ads" data-i18n="rates.discLink">Ver gestión de anuncios →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="terms">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="terms.eyebrow">Términos</span>
+        <h2 data-i18n="terms.title">Reglas claras desde el inicio</h2>
+      </div>
+      <div class="spec-list">
+        <div class="spec-row"><div class="k" data-i18n="terms.r1k">PAGO</div><div class="v" data-i18n="terms.r1v">Cada plan se paga por adelantado. Empezamos a prepararlo cuando recibimos el pago y tu cuestionario.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r2k">PLAZO MÍNIMO</div><div class="v" data-i18n="terms.r2v">La suscripción mensual tiene un mínimo de 3 meses. Después es mes a mes y puedes cancelar con 30 días de aviso. El plan único no tiene plazo.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r3k">AJUSTES</div><div class="v" data-i18n="terms.r3v">Incluye una ronda de ajustes por plan después de la entrega.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r4k">TU PARTE</div><div class="v" data-i18n="terms.r4v">Grabar, editar y publicar el contenido, y contestar comentarios y mensajes. El resultado depende de que sigas el plan.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r5k">RESULTADOS</div><div class="v" data-i18n="terms.r5v">Diseñamos el plan para hacer crecer tu presencia y atraer clientes, pero no garantizamos un número específico de seguidores, vistas o prospectos.</div></div>
+        <div class="spec-row"><div class="k" data-i18n="terms.r6k">NO INCLUYE</div><div class="v" data-i18n="terms.r6v">Grabación o edición de video, diseño gráfico, publicación de las piezas, atención de comentarios ni anuncios pagados. Te los podemos cotizar aparte.</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cta-block">
+      <div>
+        <h2 data-i18n="footer.title">Empieza tu plan de contenido.</h2>
+        <p class="contact-line">craig.verbeck@expmexico.mx · +52 984 213 6512</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://calendly.com/expmexico/craig" target="_blank" rel="noopener" data-i18n="footer.cta1">Agendar llamada</a>
+        <a class="btn btn-ghost" href="https://wa.me/529842136512?text=Hola%20Craig%2C%20me%20interesa%20el%20plan%20de%20contenido%20para%20redes%20sociales" target="_blank" rel="noopener" data-i18n="footer.cta2">WhatsApp</a>
+      </div>
+    </div>
+    <div class="fine-print">
+      <span data-i18n="footer.fine">Real Tech 4 Realtors — un servicio de Craig Verbeck</span>
+      <a class="mono" href="https://realtech4realtors.com" style="text-decoration:none">realtech4realtors.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var I18N = {
+    en: {
+      "nav.includes":"What's included","nav.rates":"Rates","nav.terms":"Terms","nav.cta":"Book a call",
+      "hero.eyebrow":"Social media content plan",
+      "hero.title":"Know what to post, every day.",
+      "hero.lede":"We give you a 30-day plan of what to post and when: the idea, what to film, the caption and the hashtags. You film and post; we handle the strategy.",
+      "hero.cta1":"Book a call","hero.cta2":"WhatsApp Craig",
+      "hero.stat1v":"From $900 MXN/mo","hero.stat1k":"With a monthly subscription",
+      "hero.stat2v":"30 days planned","hero.stat2k":"What to post and at what time",
+      "hero.stat3k":"One platform or all three",
+      "inc.eyebrow":"What's included","inc.title":"Your whole month, planned","inc.sub":"A clear plan you follow from your phone. No more guessing what to post or when.",
+      "inc.r1k":"KICKOFF QUESTIONNAIRE","inc.r1v":"You tell us your area, your listings, who you want to reach and your style, so the plan sounds like you",
+      "inc.r2k":"30-DAY CALENDAR","inc.r2v":"What to post each day and the best time, mixing listings, tips, your area and your personal brand",
+      "inc.r3k":"IDEAS & SCRIPTS","inc.r3v":"For every video: the hook for the first seconds, what to film and what to say",
+      "inc.r4k":"READY-TO-USE CAPTIONS","inc.r4v":"Caption, hashtags and call to action, ready to copy and paste",
+      "inc.r5k":"FORMATS","inc.r5v":"Reels, stories, carousels and posts, based on what works best on each platform",
+      "inc.youTitle":"You film and post.","inc.youBody":"We tell you what to do each day; filming, editing and posting stay in your hands. You keep your own voice and the price stays low.",
+      "rates.eyebrow":"Rates","rates.title":"One plan or a subscription","rates.sub":"Buy a single plan to try it, or subscribe and get a new plan every month at a better price.",
+      "rates.plansLabel":"CONTENT PLANS",
+      "rates.t1":"Single plan","rates.t1s":"One-time payment · 30 days","rates.t1i":"Great for trying it out or for a launch month",
+      "rates.one":"1 platform","rates.one2":"1 platform",
+      "rates.t2":"Monthly subscription","rates.t2s":"A new plan every month · 3-month minimum","rates.t2i":"Each plan learns from what worked the month before",
+      "rates.mo":"MXN/mo","rates.mo2":"MXN/mo",
+      "rates.note":"Prices in Mexican pesos. IVA is added if you need a factura.",
+      "rates.addLabel":"OPTIONAL ADD-ONS",
+      "rates.a1":"Strategy or review call","rates.a1u":"MXN per call","rates.a1d":"45-minute video call to review your plan or your results, or answer questions",
+      "rates.a2":"Video review","rates.a2u":"MXN/mo","rates.a2d":"Send us your videos on WhatsApp before posting and we'll give you feedback to improve them",
+      "rates.discTitle":"25% off for clients:","rates.discBody":"with an active Quick Close CRM account or our ads management, you get 25% off your content plan. Discounts can't be combined.","rates.discLink":"See ads management →",
+      "terms.eyebrow":"Terms","terms.title":"Clear rules from day one",
+      "terms.r1k":"PAYMENT","terms.r1v":"Each plan is paid up front. We start preparing it once we receive payment and your questionnaire.",
+      "terms.r2k":"MINIMUM TERM","terms.r2v":"The monthly subscription has a 3-month minimum. After that it's month to month, cancel with 30 days' notice. The single plan has no term.",
+      "terms.r3k":"REVISIONS","terms.r3v":"Each plan includes one round of adjustments after delivery.",
+      "terms.r4k":"YOUR PART","terms.r4v":"Filming, editing and posting the content, and replying to comments and messages. Results depend on you following the plan.",
+      "terms.r5k":"RESULTS","terms.r5v":"We design the plan to grow your presence and attract clients, but we don't guarantee a specific number of followers, views or leads.",
+      "terms.r6k":"NOT INCLUDED","terms.r6v":"Video shooting or editing, graphic design, posting, comment management, or paid ads. We can quote them separately.",
+      "footer.title":"Start your content plan.","footer.cta1":"Book a call","footer.cta2":"WhatsApp",
+      "footer.fine":"Real Tech 4 Realtors — a service of Craig Verbeck"
+    },
+    fr: {
+      "nav.includes":"Ce qui est inclus","nav.rates":"Tarifs","nav.terms":"Conditions","nav.cta":"Réserver un appel",
+      "hero.eyebrow":"Plan de contenu pour les réseaux sociaux",
+      "hero.title":"Sachez quoi publier, chaque jour.",
+      "hero.lede":"Nous vous remettons un plan de 30 jours : quoi publier et quand, l'idée, quoi filmer, le texte et les hashtags. Vous filmez et publiez ; nous pensons la stratégie.",
+      "hero.cta1":"Réserver un appel","hero.cta2":"WhatsApp avec Craig",
+      "hero.stat1v":"Dès 900 MXN/mois","hero.stat1k":"Avec l'abonnement mensuel",
+      "hero.stat2v":"30 jours planifiés","hero.stat2k":"Quoi publier et à quelle heure",
+      "hero.stat3k":"Un réseau ou les trois",
+      "inc.eyebrow":"Ce qui est inclus","inc.title":"Tout votre mois, planifié","inc.sub":"Un plan clair à suivre depuis votre téléphone. Fini de deviner quoi publier et quand.",
+      "inc.r1k":"QUESTIONNAIRE DE DÉPART","inc.r1v":"Vous nous parlez de votre zone, de vos biens, de votre clientèle cible et de votre style, pour que le plan vous ressemble",
+      "inc.r2k":"CALENDRIER DE 30 JOURS","inc.r2v":"Quoi publier chaque jour et le meilleur horaire, en mêlant biens, conseils, quartier et marque personnelle",
+      "inc.r3k":"IDÉES ET SCRIPTS","inc.r3v":"Pour chaque vidéo : l'accroche des premières secondes, quoi filmer et quoi dire",
+      "inc.r4k":"TEXTES PRÊTS","inc.r4v":"Texte de publication, hashtags et appel à l'action, prêts à copier-coller",
+      "inc.r5k":"FORMATS","inc.r5v":"Reels, stories, carrousels et publications, selon ce qui fonctionne le mieux sur chaque réseau",
+      "inc.youTitle":"Vous filmez et publiez.","inc.youBody":"Nous vous disons quoi faire chaque jour ; le tournage, le montage et la publication restent entre vos mains. Vous gardez votre voix et le prix reste bas.",
+      "rates.eyebrow":"Tarifs","rates.title":"Un plan ou un abonnement","rates.sub":"Achetez un seul plan pour essayer, ou abonnez-vous et recevez un nouveau plan chaque mois à meilleur prix.",
+      "rates.plansLabel":"PLANS DE CONTENU",
+      "rates.t1":"Plan unique","rates.t1s":"Paiement unique · 30 jours","rates.t1i":"Idéal pour essayer ou pour un mois de lancement",
+      "rates.one":"1 réseau social","rates.one2":"1 réseau social",
+      "rates.t2":"Abonnement mensuel","rates.t2s":"Un nouveau plan chaque mois · minimum 3 mois","rates.t2i":"Chaque plan tient compte de ce qui a marché le mois précédent",
+      "rates.mo":"MXN/mois","rates.mo2":"MXN/mois",
+      "rates.note":"Prix en pesos mexicains. L'IVA s'ajoute si vous avez besoin d'une facture.",
+      "rates.addLabel":"OPTIONS",
+      "rates.a1":"Appel stratégie ou bilan","rates.a1u":"MXN par appel","rates.a1d":"Appel vidéo de 45 minutes pour revoir votre plan ou vos résultats, ou répondre à vos questions",
+      "rates.a2":"Revue de vos vidéos","rates.a2u":"MXN/mois","rates.a2d":"Envoyez-nous vos vidéos sur WhatsApp avant publication et nous vous donnons nos commentaires pour les améliorer",
+      "rates.discTitle":"25 % de réduction pour nos clients :","rates.discBody":"avec un compte Quick Close CRM actif ou notre gestion publicitaire, vous bénéficiez de 25 % de réduction sur votre plan de contenu. Les réductions ne sont pas cumulables.","rates.discLink":"Voir la gestion publicitaire →",
+      "terms.eyebrow":"Conditions","terms.title":"Des règles claires dès le départ",
+      "terms.r1k":"PAIEMENT","terms.r1v":"Chaque plan se paie d'avance. Nous commençons dès réception du paiement et de votre questionnaire.",
+      "terms.r2k":"DURÉE MINIMALE","terms.r2v":"L'abonnement mensuel a une durée minimale de 3 mois. Ensuite, il est mensuel, résiliable avec 30 jours de préavis. Le plan unique est sans engagement.",
+      "terms.r3k":"AJUSTEMENTS","terms.r3v":"Chaque plan inclut une série d'ajustements après la livraison.",
+      "terms.r4k":"VOTRE PART","terms.r4v":"Filmer, monter et publier le contenu, et répondre aux commentaires et messages. Les résultats dépendent du suivi du plan.",
+      "terms.r5k":"RÉSULTATS","terms.r5v":"Nous concevons le plan pour développer votre présence et attirer des clients, sans garantir un nombre précis d'abonnés, de vues ou de prospects.",
+      "terms.r6k":"NON INCLUS","terms.r6v":"Tournage ou montage vidéo, design graphique, publication, gestion des commentaires et publicité payante. Nous pouvons les chiffrer à part.",
+      "footer.title":"Lancez votre plan de contenu.","footer.cta1":"Réserver un appel","footer.cta2":"WhatsApp",
+      "footer.fine":"Real Tech 4 Realtors — un service de Craig Verbeck"
+    },
+    es: {}
+  };
+
+  // Spanish is the page's default markup; capture it so switching back works.
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    I18N.es[el.getAttribute('data-i18n')] = el.textContent;
+  });
+
+  function applyLang(lang){
+    var dict = I18N[lang] || I18N.es;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    document.documentElement.setAttribute('lang', lang);
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+  });
+
+  applyLang('es');
+})();
+</script>
+
+</body>
+</html>
